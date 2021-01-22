@@ -12,4 +12,9 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  signUp(): void{
+    //signup button click event
+    console.log("SIGNUP")
+  }
+
 }

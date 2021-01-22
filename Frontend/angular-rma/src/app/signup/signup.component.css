@@ -1,0 +1,211 @@
+.mediaViewInfo {
+    --web-view-name: Registrierung;
+    --web-view-id: Registrierung;
+    --web-scale-on-resize: true;
+    --web-enable-deep-linking: true;
+}
+
+:root {
+    --web-view-ids: Registrierung;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+}
+
+#Registrierung {
+    position: absolute;
+    width: 768px;
+    height: 1024px;
+    background-color: rgba(0, 0, 0, 1);
+    overflow: hidden;
+    --web-view-name: Registrierung;
+    --web-view-id: Registrierung;
+    --web-scale-on-resize: true;
+    --web-enable-deep-linking: true;
+}
+
+@keyframes {}
+
+#Rechteck_1 {
+    fill: rgba(0, 74, 143, 1);
+    stroke: rgba(112, 112, 112, 1);
+    stroke-width: 1px;
+    stroke-linejoin: miter;
+    stroke-linecap: butt;
+    stroke-miterlimit: 4;
+    shape-rendering: auto;
+}
+
+.Rechteck_1 {
+    position: absolute;
+    overflow: visible;
+    width: 768px;
+    height: 152px;
+    left: 0px;
+    top: 151px;
+}
+
+#Willkommen_bei_RMA__-_dem_Runn {
+    left: 40px;
+    top: 170px;
+    position: absolute;
+    overflow: visible;
+    width: 689px;
+    white-space: nowrap;
+    text-align: center;
+    font-family: Microsoft Tai Le;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 60px;
+    color: rgba(255, 255, 255, 1);
+    text-transform: uppercase;
+}
+
+#Registrieren {
+    left: 242px;
+    top: 389px;
+    position: absolute;
+    overflow: visible;
+    width: 285px;
+    white-space: nowrap;
+    text-align: center;
+    font-family: Microsoft Tai Le;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    color: rgba(0, 74, 143, 1);
+}
+
+#Benutzer {
+    left: 79px;
+    top: 479px;
+    position: absolute;
+    overflow: visible;
+    width: 135px;
+    white-space: nowrap;
+    text-align: center;
+    font-family: Microsoft Tai Le;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: rgba(0, 74, 143, 1);
+}
+
+#Passwort {
+    left: 79px;
+    top: 535px;
+    position: absolute;
+    overflow: visible;
+    width: 135px;
+    white-space: nowrap;
+    text-align: center;
+    font-family: Microsoft Tai Le;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: rgba(0, 74, 143, 1);
+}
+
+#Rechteck_2 {
+    fill: rgba(255, 255, 255, 1);
+    stroke: rgba(112, 112, 112, 1);
+    stroke-width: 2px;
+    stroke-linejoin: round;
+    stroke-linecap: butt;
+    stroke-miterlimit: 4;
+    shape-rendering: auto;
+}
+
+.Rechteck_2 {
+    position: absolute;
+    overflow: visible;
+    width: 453px;
+    height: 38px;
+    left: 237px;
+    top: 479px;
+}
+
+#Rechteck_3 {
+    fill: rgba(255, 255, 255, 1);
+    stroke: rgba(112, 112, 112, 1);
+    stroke-width: 2px;
+    stroke-linejoin: round;
+    stroke-linecap: butt;
+    stroke-miterlimit: 4;
+    shape-rendering: auto;
+}
+
+.Rechteck_3 {
+    position: absolute;
+    overflow: visible;
+    width: 453px;
+    height: 38px;
+    left: 237px;
+    top: 535px;
+}
+
+#Anmelden {
+    left: 520px;
+    top: 602px;
+    position: absolute;
+    overflow: visible;
+    width: 145px;
+    white-space: nowrap;
+    text-align: center;
+    font-family: Microsoft Tai Le;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: rgba(0, 74, 143, 1);
+}
+
+#Rechteck_4 {
+    fill: rgba(255, 255, 255, 0);
+    stroke: rgba(0, 74, 143, 1);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-miterlimit: 4;
+    shape-rendering: auto;
+}
+
+.Rechteck_4 {
+    position: absolute;
+    overflow: visible;
+    width: 190px;
+    height: 58px;
+    left: 500px;
+    top: 591px;
+    --web-animation: fadein 0.3s ease-out;
+    --web-action-type: page;
+    --web-action-target: Hauptmen_.html;
+    cursor: pointer;
+}
+
+#logo_large {
+    position: absolute;
+    width: 164px;
+    height: 158px;
+    left: 0px;
+    top: 0px;
+    overflow: visible;
+}
+
+#Registrierung_z {
+    left: 209px;
+    top: 31px;
+    position: absolute;
+    overflow: visible;
+    width: 511px;
+    white-space: nowrap;
+    text-align: center;
+    font-family: Microsoft Tai Le;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 80px;
+    color: rgba(255, 255, 255, 1);
+}

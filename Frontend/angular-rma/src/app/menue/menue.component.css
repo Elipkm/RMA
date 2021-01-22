@@ -1,0 +1,214 @@
+.mediaViewInfo {
+    --web-view-name: Hauptmenü;
+    --web-view-id: Hauptmen;
+    --web-scale-on-resize: true;
+    --web-enable-deep-linking: true;
+}
+
+:root {
+    --web-view-ids: Hauptmen;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+}
+
+#Hauptmen {
+    position: absolute;
+    width: 768px;
+    height: 1024px;
+    background-color: rgba(0, 0, 0, 1);
+    overflow: hidden;
+    --web-view-name: Hauptmenü;
+    --web-view-id: Hauptmen;
+    --web-scale-on-resize: true;
+    --web-enable-deep-linking: true;
+}
+
+@keyframes {}
+
+@keyframes {}
+
+#Rechteck_1 {
+    fill: rgba(0, 74, 143, 1);
+    stroke: rgba(112, 112, 112, 1);
+    stroke-width: 1px;
+    stroke-linejoin: miter;
+    stroke-linecap: butt;
+    stroke-miterlimit: 4;
+    shape-rendering: auto;
+}
+
+.Rechteck_1 {
+    position: absolute;
+    overflow: visible;
+    width: 768px;
+    height: 17px;
+    left: 0px;
+    top: 150px;
+}
+
+#Was_mchten__sie_tun {
+    left: 148px;
+    top: 231px;
+    position: absolute;
+    overflow: visible;
+    width: 473px;
+    height: 154px;
+    text-align: center;
+    font-family: Microsoft Tai Le;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 60px;
+    color: rgba(255, 255, 255, 1);
+    text-transform: uppercase;
+}
+
+#Ergebnisse {
+    fill: rgba(0, 74, 143, 1);
+    stroke: rgba(112, 112, 112, 1);
+    stroke-width: 1px;
+    stroke-linejoin: miter;
+    stroke-linecap: butt;
+    stroke-miterlimit: 4;
+    shape-rendering: auto;
+}
+
+.Ergebnisse {
+    position: absolute;
+    overflow: visible;
+    width: 610px;
+    height: 196px;
+    left: 79px;
+    top: 708px;
+}
+
+#Komponente_3__1 {
+    position: absolute;
+    width: 610px;
+    height: 196px;
+    left: 79px;
+    top: 449px;
+    overflow: visible;
+}
+
+#Neuer_Lauf {
+    fill: rgba(0, 74, 143, 1);
+    stroke: rgba(112, 112, 112, 1);
+    stroke-width: 1px;
+    stroke-linejoin: miter;
+    stroke-linecap: butt;
+    stroke-miterlimit: 4;
+    shape-rendering: auto;
+}
+
+.Neuer_Lauf {
+    width: 610px;
+    height: 196px;
+    position: absolute;
+    overflow: visible;
+    transform: translate(0px, 0px) matrix(1, 0, 0, 1, 0, 0) rotate(0deg);
+    transform-origin: center;
+    --web-animation: fadein 0.3s ease-out;
+    --web-action-type: page;
+    --web-action-target: Bewerbauswahl_.html;
+    cursor: pointer;
+}
+
+#Komponente_2__1 {
+    position: absolute;
+    width: 555px;
+    height: 104px;
+    left: 26px;
+    top: 55px;
+    overflow: visible;
+}
+
+#Neuer_Lauf_v {
+    left: 0px;
+    top: 8px;
+    position: absolute;
+    overflow: visible;
+    width: 391px;
+    white-space: nowrap;
+    text-align: center;
+    font-family: Microsoft Tai Le;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 75px;
+    color: rgba(255, 255, 255, 1);
+}
+
+#logo_small {
+    position: absolute;
+    width: 138px;
+    height: 104px;
+    left: 417px;
+    top: 0px;
+    overflow: visible;
+}
+
+#Ergebnisse_x {
+    left: 196px;
+    top: 758px;
+    position: absolute;
+    overflow: visible;
+    width: 377px;
+    white-space: nowrap;
+    text-align: center;
+    font-family: Microsoft Tai Le;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 75px;
+    color: rgba(255, 255, 255, 1);
+}
+
+#Profilbild {
+    fill: rgba(255, 255, 255, 1);
+    stroke: rgba(112, 112, 112, 1);
+    stroke-width: 1px;
+    stroke-linejoin: miter;
+    stroke-linecap: butt;
+    stroke-miterlimit: 4;
+    shape-rendering: auto;
+}
+
+.Profilbild {
+    position: absolute;
+    overflow: visible;
+    width: 100px;
+    height: 100px;
+    left: 639px;
+    top: 29px;
+    --web-animation: fadein 0.3s ease-out;
+    --web-action-type: page;
+    --web-action-target: Anmeldung.html;
+    cursor: pointer;
+}
+
+#logo_large {
+    position: absolute;
+    width: 164px;
+    height: 158px;
+    left: 0px;
+    top: 0px;
+    overflow: visible;
+}
+
+#Guten_Tag {
+    left: 208px;
+    top: 35px;
+    position: absolute;
+    overflow: visible;
+    width: 365px;
+    white-space: nowrap;
+    text-align: center;
+    font-family: Microsoft Tai Le;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 70px;
+    color: rgba(255, 255, 255, 1);
+}
