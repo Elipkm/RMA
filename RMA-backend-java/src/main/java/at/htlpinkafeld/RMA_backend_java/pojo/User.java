@@ -1,11 +1,26 @@
 package at.htlpinkafeld.RMA_backend_java.pojo;
 
-public class User {
+import at.htlpinkafeld.RMA_backend_java.dao.Identifiable;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
+
+public class User implements Identifiable {
+
     private String username;
     private String password;
 
-    public User(String username, String password) {
-        this.username = username;
+    private int id = -1;
+
+    public User(String username, String password,int id) {
+        this.setUsername(username);
+        this.password = password;
+        this.id = id;
+    }
+
+    @JsonCreator
+    public User(@JsonProperty("username") String username, @JsonProperty("password") String password) {
+        this.setUsername(username);
         this.password = password;
     }
 
@@ -14,7 +29,7 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username.toLowerCase();
     }
 
     public String getPassword() {
@@ -23,5 +38,32 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public int getID() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return username.equals(user.username) && password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password);
     }
 }

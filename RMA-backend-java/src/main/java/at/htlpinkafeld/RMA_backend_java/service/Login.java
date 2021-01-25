@@ -1,6 +1,7 @@
-package at.htlpinkafeld.RMA_backend_java;
+package at.htlpinkafeld.RMA_backend_java.service;
 
-import at.htlpinkafeld.RMA_backend_java.dao.UserDAO;
+import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
+import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 
 import javax.ws.rs.Consumes;
@@ -13,10 +14,9 @@ import java.util.List;
 @Path("/login")
 public class Login  {
 
-    private UserDAO userDAO = DependencyInjector.getNewUserDAO();
+    private UserDao userDAO = DependencyInjector.getUserDAO();
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @POST @Consumes(MediaType.APPLICATION_JSON)
     public Response login(final User possibleUser){
         boolean authenticated = this.authenticate(possibleUser);
 
