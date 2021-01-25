@@ -1,0 +1,6 @@
+package at.htlpinkafeld.RMA_backend_java.dao;
+
+import at.htlpinkafeld.RMA_backend_java.pojo.User;
+
+public interface UserDAO extends CRUD<User>{
+}
