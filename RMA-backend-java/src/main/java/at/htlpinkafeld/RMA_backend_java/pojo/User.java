@@ -46,6 +46,11 @@ public class User implements Identifiable {
     }
 
     @Override
+    public void setID(int id) {
+        this.id = id;
+    }
+
+    @Override
     public String toString() {
         return "User{" +
                 "username='" + username + '\'' +

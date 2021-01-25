@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+    <!-- Must be corrected for mysql -->
+    <Resource name="jdbc/___db___"
+              auth="Container"
+              type="javax.sql.DataSource"
+              username="xxx"
+              password="xxx"
+              driverClassName="org.hsqldb.jdbcDriver"
+              url="url/to/db"
+              maxWaitMillis="10000"
+              maxTotal="8"
+              maxIdle="4" />
+
+</Context>
