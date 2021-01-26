@@ -2,6 +2,8 @@ import { StringDecoder } from "string_decoder";
 
 export class User {
 
+    password: string;
+
     constructor(private username:string) { }
 
     getUserName(): string{
