@@ -21,5 +21,6 @@ public class ResponseServerFilter implements ContainerResponseFilter {
         for(String allowedUrl : allowedUrlsForCORS){
             responseContext.getHeaders().add("Access-Control-Allow-Origin",allowedUrl);
         }
+        responseContext.getHeaders().add("Access-Control-Allow-Credentials","true");
     }
 }
