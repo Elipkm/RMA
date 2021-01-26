@@ -17,18 +17,11 @@ public class UserTest {
     public void getUsername(){
         assertEquals("david",user.getUsername());
     }
+
     @Test
     public void setUsername() {
         user.setUsername("zach");
         assertEquals("zach",user.getUsername());
     }
 
-    @Test
-    void testEquals() {
-        User equal = new User("david","myPassword");
-        assertTrue(user.equals(equal));
-
-        User notEqual = new User("david","wrongPW");
-        assertFalse(user.equals(notEqual));
-    }
 }

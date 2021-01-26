@@ -1,27 +1,20 @@
 package at.htlpinkafeld.RMA_backend_java.pojo;
 
 import at.htlpinkafeld.RMA_backend_java.dao.Identifiable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import at.htlpinkafeld.RMA_backend_java.utility.PasswordEncoder;
+
 import java.util.Objects;
 
 public class User implements Identifiable {
 
     private String username;
-    private String password;
+    private String encodedPassword;
 
     private int id = -1;
 
-    public User(String username, String password,int id) {
+    public User(String username, String password) {
         this.setUsername(username);
-        this.password = password;
-        this.id = id;
-    }
-
-    @JsonCreator
-    public User(@JsonProperty("username") String username, @JsonProperty("password") String password) {
-        this.setUsername(username);
-        this.password = password;
+        this.encodedPassword = new PasswordEncoder(password).getEncodedPassword();
     }
 
     public String getUsername() {
@@ -32,12 +25,25 @@ public class User implements Identifiable {
         this.username = username.toLowerCase();
     }
 
-    public String getPassword() {
-        return password;
+    public String getEncodedPassword() {
+        return encodedPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password,boolean isHashed) {
+        if(isHashed) {
+            this.encodedPassword = password;
+        } else{
+            this.encodedPassword = new PasswordEncoder(password).getEncodedPassword();
+        }
+    }
+
+    public boolean authenticate(String username,String plainPassword){
+        if(username.equals(this.username)){
+            if(new PasswordEncoder().matches(plainPassword,this.encodedPassword)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -54,21 +60,13 @@ public class User implements Identifiable {
     public String toString() {
         return "User{" +
                 "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + encodedPassword + '\'' +
                 ", id=" + id +
                 '}';
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return username.equals(user.username) && password.equals(user.password);
-    }
-
-    @Override
     public int hashCode() {
-        return Objects.hash(username, password);
+        return Objects.hash(username, encodedPassword);
     }
 }

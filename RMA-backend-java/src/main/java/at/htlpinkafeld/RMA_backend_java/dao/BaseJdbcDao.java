@@ -2,7 +2,7 @@ package at.htlpinkafeld.RMA_backend_java.dao;
 
 
 import at.htlpinkafeld.RMA_backend_java.WrappedConnection;
-import at.htlpinkafeld.RMA_backend_java.exception.DAOSysException;
+import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
         return statement;
     }
 
-    public final void delete(T t) throws DAOSysException {
+    public final void delete(T t) throws DaoSysException {
         if(t.getID() < 0) {
             return;
         }
@@ -48,15 +48,15 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
             PreparedStatement statement = getPreparedStatement(wrCon.getConn(), sql, t.getID())) {
 
             if(statement.executeUpdate() == 0) {
-                throw new DAOSysException("nothing was updated");
+                throw new DaoSysException("nothing was updated");
             }
         } catch (SQLException e) {
-            throw new DAOSysException(e.getMessage());
+            throw new DaoSysException(e.getMessage());
         }
     }
 
     //template methods because of use of getPojoFromResultSet()
-    public final T read(int id) throws DAOSysException {
+    public final T read(int id) throws DaoSysException {
         T t = null;
         String sql = "SELECT * FROM " + this.TABLENAME + " WHERE " + this.PKNAME + " = ?";
 
@@ -68,12 +68,12 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
                 t = getPojoFromResultSet(result);
             }
         } catch (SQLException e) {
-            throw new DAOSysException(e.getMessage());
+            throw new DaoSysException(e.getMessage());
         }
         return t;
     }
 
-    public final List<T> list() throws DAOSysException {
+    public final List<T> list() throws DaoSysException {
         List<T> results = new ArrayList<>();
         String sql = "SELECT * FROM " + TABLENAME;
         try (WrappedConnection wrCon = ConnectionManager.getInstance().getWrappedConnection();
@@ -84,12 +84,12 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
                 results.add(getPojoFromResultSet(result));
             }
         } catch (SQLException e) {
-            throw new DAOSysException(e.getMessage());
+            throw new DaoSysException(e.getMessage());
         }
         return results;
     }
 
-    public final void update(T t) throws DAOSysException {
+    public final void update(T t) throws DaoSysException {
         if (t.getID() < 0) {
             return;
         }
@@ -98,14 +98,14 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
              PreparedStatement statement = getUpdateStatement(wrCon.getConn(), t)  ){
 
             if(statement.executeUpdate() == 0) {
-                throw new DAOSysException("nothing was updated");
+                throw new DaoSysException("nothing was updated");
             }
         } catch (SQLException e) {
-            throw new DAOSysException(e.getMessage());
+            throw new DaoSysException(e.getMessage());
         }
     }
 
-    public final void create(T t) throws DAOSysException {
+    public final void create(T t) throws DaoSysException {
         if (t.getID() >= 0) {
             return;
         }
@@ -118,7 +118,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
                 t.setID(generatedKeys.getInt(1));
             }
         } catch (SQLException e) {
-            throw new DAOSysException(e.getMessage(), e.getErrorCode());
+            throw new DaoSysException(e.getMessage(), e.getErrorCode());
         }
     }
 }

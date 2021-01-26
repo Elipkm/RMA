@@ -2,7 +2,6 @@ package at.htlpinkafeld.RMA_backend_java.dao;
 
 
 
-import at.htlpinkafeld.RMA_backend_java.exception.DAOSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 
 import java.sql.*;
@@ -25,7 +24,7 @@ public class UserJdbcDao extends BaseJdbcDao<User> implements UserDao {
         String sql = "UPDATE " + getTablename() + " SET Username = ?, Password = ? WHERE " + getPkName() + " = ?";
         PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, u.getUsername());
-        statement.setString(2, u.getPassword());
+        statement.setString(2, u.getEncodedPassword());
         statement.setLong(3, u.getID());
         return statement;
     }
@@ -36,7 +35,7 @@ public class UserJdbcDao extends BaseJdbcDao<User> implements UserDao {
 
         PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, u.getUsername());
-        statement.setString(2, u.getPassword());
+        statement.setString(2, u.getEncodedPassword());
         return  statement;
     }
 }
