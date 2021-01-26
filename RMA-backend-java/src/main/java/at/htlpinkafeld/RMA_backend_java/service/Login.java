@@ -2,6 +2,7 @@ package at.htlpinkafeld.RMA_backend_java.service;
 
 import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
+import at.htlpinkafeld.RMA_backend_java.exception.DAOSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 
 import javax.ws.rs.Consumes;
@@ -18,7 +19,13 @@ public class Login  {
 
     @POST @Consumes(MediaType.APPLICATION_JSON)
     public Response login(final User possibleUser){
-        boolean authenticated = this.authenticate(possibleUser);
+        boolean authenticated;
+        try {
+            authenticated = this.authenticate(possibleUser);
+        } catch (DAOSysException e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
 
         if(authenticated){
             return Response.ok().build();
@@ -27,7 +34,7 @@ public class Login  {
         }
     }
 
-    private boolean authenticate(final User possibleUser){
+    private boolean authenticate(final User possibleUser) throws DAOSysException {
         List<User> userList = userDAO.list();
         for(User user : userList){
             if(possibleUser.equals(user)){
