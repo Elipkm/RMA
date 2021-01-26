@@ -18,10 +18,11 @@ export class UserService {
   }
 
   listUsers(){
-    //list with mock data for testing purpose
+    return this.http.get<any>(this._userListUrl);
+    /*//list with mock data for testing purpose
     return new Observable<any>((observer) => {
       observer.next(this.usersMock);
       observer.complete();
-    });
+    });*/
   }
 }
