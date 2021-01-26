@@ -2,6 +2,7 @@ package at.htlpinkafeld.RMA_backend_java.service;
 
 import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
+import at.htlpinkafeld.RMA_backend_java.exception.DAOSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 
 import javax.ws.rs.Consumes;
@@ -17,8 +18,13 @@ public class Register {
 
     @POST @Consumes(MediaType.APPLICATION_JSON)
     public Response register(final User user){
-        userDao.create(user);
-        // TODO send Authentication
+        try {
+            userDao.create(user);
+        } catch (DAOSysException e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+
 
         return Response.ok().build();
     }
