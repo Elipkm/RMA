@@ -31,8 +31,8 @@ public abstract class ConnectionManager {
 
             try {
                 Context ctx = new javax.naming.InitialContext();
-                //TODO fill in correct dataSource, also in web.xml and META-INF/context.xml
-                String dsName = "jdbc/___database___";
+
+                String dsName = "jdbc/RMA";
                 datSrc = (DataSource) ctx.lookup("java:comp/env/" + dsName);
 
 

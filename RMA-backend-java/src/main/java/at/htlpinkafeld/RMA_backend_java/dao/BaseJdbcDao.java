@@ -56,7 +56,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
     }
 
     //template methods because of use of getPojoFromResultSet()
-    public final T get(int id) throws DAOSysException {
+    public final T read(int id) throws DAOSysException {
         T t = null;
         String sql = "SELECT * FROM " + this.TABLENAME + " WHERE " + this.PKNAME + " = ?";
 
@@ -118,8 +118,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
                 t.setID(generatedKeys.getInt(1));
             }
         } catch (SQLException e) {
-            throw new DAOSysException(e.getMessage());
+            throw new DAOSysException(e.getMessage(), e.getErrorCode());
         }
     }
-
 }
