@@ -1,18 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { User } from 'src/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private usersMock: User[] = [new User("RonaldUnger"), new User("Herbst123"), new User("Sherminator"),
-                              new User("ronaldunger2")]
-
-  private _userListUrl = ".../rma/users";
+  private _userListUrl = "http://localhost:8080/RMA/rma/usernames";
+  //private _userListUrl =  "https://jsonplaceholder.typicode.com/todos/";
   constructor(private http: HttpClient,
               private _router: Router) { 
   }

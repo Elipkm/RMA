@@ -1,10 +1,8 @@
-import { StringDecoder } from "string_decoder";
-
 export class User {
 
     password: string;
 
-    constructor(private username:string) { }
+    constructor(public username:string) { }
 
     getUserName(): string{
         return this.username;

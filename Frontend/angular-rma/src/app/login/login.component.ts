@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/User';
+import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -22,11 +23,17 @@ export class LoginComponent implements OnInit {
 
   constructor(private _router:Router,
               private _userService: UserService,
+              private _authService: AuthService,
               private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this._userService.listUsers().subscribe(
-      res => {this.users = res},
+      res => {
+        for(let username of res){
+          this.users.push(new User(username));
+        }
+        console.log(res)
+      },
       err => console.log(err)
     )
   }
@@ -34,6 +41,14 @@ export class LoginComponent implements OnInit {
   logIn(): void{
     //login button click event triggered within login popup
     console.log(this.selectedUser.password);
+    this._authService.loginUser(this.selectedUser).subscribe(
+      res => {
+        console.log(res);
+        localStorage.setItem('token', res.token);
+        this._router.navigate(['/menue']);
+      },
+      err => console.log("ERROR: 403")
+    );
     
   }
 
@@ -42,7 +57,6 @@ export class LoginComponent implements OnInit {
   }
 
   calculateTopStyleOfUserShortcut(i: number):number{
-    console.log(240+236*Math.floor((i/3)));
     return 240+236*Math.floor((i/3));
   }
 

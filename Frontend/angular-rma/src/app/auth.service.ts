@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private _registerUrl = ".../rma/register";
-  private _loginUrl = ".../rma/login";
+  private _registerUrl = "http://localhost:8080/RMA/rma/register";
+  private _loginUrl = "http://localhost:8080/RMA/rma/login";
   constructor(private http: HttpClient,
               private _router: Router) { 
   }
@@ -22,13 +22,13 @@ export class AuthService {
   }
 
   loggedIn(){
-    //return !!localStorage.getItem('token')
-    return false;
+    console.log(localStorage.getItem('token'));
+    return !!localStorage.getItem('token')
   }
 
   logoutUser(){
     localStorage.removeItem('token')
-    this._router.navigate(['/events'])
+    this._router.navigate(['/login'])
   }
 
   getToken(){
