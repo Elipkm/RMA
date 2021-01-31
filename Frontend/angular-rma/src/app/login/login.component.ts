@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
 
   users: User[] = [];
 
+  designOrientedUserList: User[][] = []; //normal userlist split into thirs for ngFor-directive in template
+
   userListLeftStyles: Number[] = [69, 299, 529]; //for showing the users shortcut fields in right column
 
   closeResult = ''; 
@@ -32,7 +34,8 @@ export class LoginComponent implements OnInit {
         for(let username of res){
           this.users.push(new User(username));
         }
-        console.log(res)
+        this.createDesignOrietendUserList();
+        console.log(this.designOrientedUserList)
       },
       err => console.log(err)
     )
@@ -80,4 +83,33 @@ export class LoginComponent implements OnInit {
       return `with: ${reason}`; 
     } 
   } 
+
+  createDesignOrietendUserList(): void{
+    let row = 0;
+    this.designOrientedUserList[row] = [];
+    /*if(this.users.length>=1)this.designOrientedUserList[row][0] = this.users[0];
+    if(this.users.length>=2)this.designOrientedUserList[row][1] = this.users[1];
+    row++;
+    this.designOrientedUserList[row] = [];
+    if(this.users.length>=3)this.designOrientedUserList[row][0] = this.users[2];*/
+    this.designOrientedUserList[row][0] = null;
+    
+    for(let i = 0; i<this.users.length;i++){
+      if((i+1) % 3 === 0 && i!=0){
+        row++;
+      }
+
+      if(this.designOrientedUserList[row]==undefined){
+        this.designOrientedUserList[row] = [];
+      }
+      /*if(row === 0 && parseInt(i+1) === 3){//just condition for first row (due to plusButton)
+        row++;
+      }else if(parseInt(i) % 3 === 0){
+        row++;
+      }*/
+      console.log("row: "+row+", list: "+this.designOrientedUserList);
+      this.designOrientedUserList[row][(i+1)%3] = this.users[i];
+    }
+    console.log(this.designOrientedUserList);
+  }
 } 
