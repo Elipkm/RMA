@@ -1,4 +1,59 @@
-<div id="Registrierung">
+<div class="Registrierung">
+	<div id="signup_heading">
+		<div class="row">
+			<div class="col-sm-2">
+				<img id="logo_large" src="assets/images/logo_large.png"
+					srcset="assets/images/logo_large.png 1x, assets/images/logo_large@2x.png 2x">
+			</div>
+			<div id="Registrieren" class="col-sm-8">
+				<span>Registrierung</span>
+			</div>
+		</div>
+		<div class="row">
+			<div id="blue_line" class="col-sm-8">
+				<div id="WelcomeToRMA">
+					<span>Willkommen bei RMA</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="signup_body">
+		<div class="row">
+			<div id="signup_form_heading" class="col-sm-12">Registrieren</div>
+		</div>
+		<form>
+			<div class="row">
+				<div class="col-sm-4">
+					<label for="username" class="signUpFormLabel">Benutzername: </label>
+				</div>
+				<div class="col-sm-8">
+					<input id="username" type="text" name="username" class="form-control signup_input" 
+					[(ngModel)]="tempUser.username">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">
+					<label for="password" class="signUpFormLabel">Passwort: </label>
+				</div>
+				<div class="col-sm-8">
+					<input id="password" type="password" name="password" class="form-control signup_input" 
+					[(ngModel)]="tempUser.password">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-10"></div>
+				<div class="col-sm-2">
+					<button id="signup_button" class="btn btn-lg btn-primary" (click)="signUp()">
+						Registrieren
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!--<div id="Registrierung">
 	<svg class="Rechteck_1">
 		<rect id="Rechteck_1" rx="0" ry="0" x="0" y="0" width="768" height="152">
 		</rect>
@@ -20,14 +75,14 @@
 		<!--<svg class="Rechteck_2">
 		<rect id="Rechteck_2" rx="15" ry="15" x="0" y="0" width="453" height="38">
 		</rect>
-	</svg>-->
+	</svg>
 		<div class="Rechteck_2">
 			<input id="Rechteck_2" name="username" [(ngModel)]="tempUser.username">
 		</div>
 		<!--<svg class="Rechteck_3">
 		<rect id="Rechteck_3" rx="15" ry="15" x="0" y="0" width="453" height="38">
 		</rect>
-	</svg>-->
+	</svg>
 		<div class="Rechteck_3">
 			<input id="Rechteck_3" type="password" name="password" [(ngModel)]="tempUser.password">
 		</div>
@@ -44,4 +99,4 @@
 	<div id="Registrierung_z">
 		<span>Registrierung</span>
 	</div>
-</div>
+</div>-->

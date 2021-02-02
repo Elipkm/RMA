@@ -119,7 +119,7 @@
 
 }
 
-#login_users{
+#login_body{
     padding: 50px;
     height: 100%;
 }
@@ -219,7 +219,7 @@
         max-width: 164px;
         /*left: 0px;
         top: 0px;*/
-        overflow: visible;; 
+        overflow: visible; 
     }
 
 /*#logo_large {
