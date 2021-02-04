@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Context>
-    <!--<Resource name="jdbc/RMA"
+    <Resource name="jdbc/RMA"
               auth="Container"
               type="javax.sql.DataSource"
               username="rma2021"
@@ -11,8 +11,9 @@
               maxWaitMillis="10000"
               maxTotal="8"
               maxIdle="4" />
-     -->
 
+
+    <!-- Lokal MySQL Instance
     <Resource name="jdbc/RMA"
               auth="Container"
               type="javax.sql.DataSource"
@@ -23,4 +24,5 @@
               maxWaitMillis="10000"
               maxTotal="8"
               maxIdle="4" />
+    -->
 </Context>
