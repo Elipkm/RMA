@@ -1,20 +1,23 @@
 package at.htlpinkafeld.RMA_backend_java.dao;
 
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
-import at.htlpinkafeld.RMA_backend_java.pojo.User;
+import at.htlpinkafeld.RMA_backend_java.mock.EventDaoMock;
+import at.htlpinkafeld.RMA_backend_java.pojo.Event;
 import hthurow.tomcatjndi.TomcatJNDI;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.sql.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
+class EventJdbcDaoTest {
 
-class UserJdbcDaoTest {
 
-    private UserJdbcDao jdbcDao;
-    
+    private EventJdbcDao jdbcDao;
+
     @BeforeAll
     static void init() {
         String pathContextFile = new File("src/main/webapp/META-INF/context.xml").getAbsolutePath();
@@ -26,19 +29,19 @@ class UserJdbcDaoTest {
 
     @BeforeEach
     void setUp() {
-        jdbcDao = new UserJdbcDao();
+        jdbcDao = new EventJdbcDao();
     }
-    
+
     @Test
     void delete() {
         try {
-            User u = new User("__deleteTest", "myTestPassword");
-            jdbcDao.create(u);
-            int idElementToDel = u.getID();
+            Event e= new Event("__deleteTest", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
+            jdbcDao.create(e);
+            int idElementToDel = e.getID();
 
             int noe = jdbcDao.list().size();
 
-            User tmp = new User("", "");
+            Event tmp = new Event("", null,null);
             tmp.setID(idElementToDel);
             jdbcDao.delete(tmp);
             assertTrue(jdbcDao.list().size() == noe-1);
@@ -50,10 +53,10 @@ class UserJdbcDaoTest {
 
     @Test
     void testDeleteException() {
-        User u = new User("__deleteTestExc", "myTestPassword");
-        u.setID(999999);
+        Event e= new Event("__deleteTestExc", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
+        e.setID(999999);
         assertThrows(DaoSysException.class, () -> {
-            jdbcDao.delete(u);
+            jdbcDao.delete(e);
         });
     }
 
@@ -62,15 +65,15 @@ class UserJdbcDaoTest {
         try {
             int noe = jdbcDao.list().size();
 
-            User u = new User("__createTest", "myTestPassword");
-            jdbcDao.create(u);
+            Event e = new Event("__createTest", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
+            jdbcDao.create(e);
 
-            int id = u.getID();
+            int id = e.getID();
 
             assertTrue(jdbcDao.list().size() == noe+1);
             assertTrue(jdbcDao.read(id) != null);
 
-            jdbcDao.delete(u);
+            jdbcDao.delete(e);
         } catch (DaoSysException e) {
             fail();
         }
@@ -79,19 +82,19 @@ class UserJdbcDaoTest {
     @Test
     void update() {
         try {
-            User u = new User("__updateTest", "myTestPassword");
+            Event e = new Event("__updateTest", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
 
-            jdbcDao.create(u);
-            int id = u.getID();
+            jdbcDao.create(e);
+            int id = e.getID();
 
-            u.setUsername("__new.username.fortest@user");
-            u.setPassword("__newPassword", true);
+            e.setStartDate(Date.valueOf("2021-01-01"));
+            e.setEndDate(Date.valueOf("2021-01-02"));
 
-            jdbcDao.update(u);
-            assertTrue("__new.username.fortest@user".equals(jdbcDao.read(id).getUsername()));
-            assertTrue("__newPassword".equals(jdbcDao.read(id).getEncodedPassword()));
+            jdbcDao.update(e);
+            assertEquals(Date.valueOf("2021-01-01"), jdbcDao.read(id).getStartDate());
+            assertEquals(Date.valueOf("2021-01-02"), jdbcDao.read(id).getEndDate());
 
-            jdbcDao.delete(u);
+            jdbcDao.delete(e);
         } catch (DaoSysException e) {
             fail();
         }
@@ -99,10 +102,11 @@ class UserJdbcDaoTest {
 
     @Test
     void testUpdateException() {
-        User u = new User("__updateTestExc", "myTestPassword");
-        u.setID(9999991);
+        Event e = new Event("__updateTestExc", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
+        e.setID(9999991);
         assertThrows(DaoSysException.class, () -> {
-            jdbcDao.update(u);
+            jdbcDao.update(e);
         });
     }
+
 }

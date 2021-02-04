@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Context>
-    <Resource name="jdbc/RMA"
+    <!--<Resource name="jdbc/RMA"
               auth="Container"
               type="javax.sql.DataSource"
               username="rma2021"
@@ -11,5 +11,16 @@
               maxWaitMillis="10000"
               maxTotal="8"
               maxIdle="4" />
+     -->
 
+    <Resource name="jdbc/RMA"
+              auth="Container"
+              type="javax.sql.DataSource"
+              username="root"
+              password="rootpassword"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://192.168.3.6:3306/RMA"
+              maxWaitMillis="10000"
+              maxTotal="8"
+              maxIdle="4" />
 </Context>
