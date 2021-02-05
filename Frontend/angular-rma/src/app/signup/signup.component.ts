@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/User';
 import { AuthService } from '../auth.service';
+import { ToastService } from '../toast.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,8 @@ export class SignupComponent implements OnInit {
   tempUser: User = new User("");
 
   constructor(private _authService: AuthService,
-              private _router: Router) { }
+              private _router: Router,
+              private _toastService: ToastService) { }
 
   ngOnInit(): void {
   }
@@ -27,9 +29,19 @@ export class SignupComponent implements OnInit {
       },
       err => {
         if(err.status === 409){
-          alert("Username already in use!");
+          this._toastService.show('Der Benutzername ist bereits vergeben!', {
+            classname: 'bg-warning text-light',
+            delay: 4000 ,
+            autohide: true,
+            headertext: 'Warning'
+          })
         }else{
-          alert("Unknown error occurred!");
+          this._toastService.show('Es ist ein unbekannter Fehler aufgetreten!', {
+            classname: 'bg-danger text-light',
+            delay: 4000 ,
+            autohide: true,
+            headertext: 'Error'
+          })
         }
       }
     );

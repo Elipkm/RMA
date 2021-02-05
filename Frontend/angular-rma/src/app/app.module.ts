@@ -14,6 +14,7 @@ import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from './user.service';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UserService } from './user.service';
     LoginComponent,
     SignupComponent,
     MenueComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

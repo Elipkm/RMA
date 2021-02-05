@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/User';
 import { AuthService } from '../auth.service';
+import { ToastService } from '../toast.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
   constructor(private _router:Router,
               private _userService: UserService,
               private _authService: AuthService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private _toastService: ToastService) { }
 
   ngOnInit(): void {
     this._userService.listUsers().subscribe(
@@ -35,7 +37,6 @@ export class LoginComponent implements OnInit {
           this.users.push(new User(username));
         }
         this.createDesignOrietendUserList();
-        console.log(this.designOrientedUserList)
       },
       err => {
         console.log(err);
@@ -54,7 +55,21 @@ export class LoginComponent implements OnInit {
         this._router.navigate(['/menue']);
       },
       err => {
-        console.log("ERROR: 403: Forbidden");
+        if(err.status === 403){
+          this._toastService.show('Das Passwort ist falsch!', {
+            classname: 'bg-warning text-light',
+            delay: 4000 ,
+            autohide: true,
+            headertext: 'Warning'
+          })
+        }else{
+          this._toastService.show('Es ist ein unbekannter Fehler aufgetreten!', {
+            classname: 'bg-danger text-light',
+            delay: 4000 ,
+            autohide: true,
+            headertext: 'Error'
+          })
+        }
         
       }
     );
@@ -103,9 +118,7 @@ export class LoginComponent implements OnInit {
       if(this.designOrientedUserList[row]==undefined){
         this.designOrientedUserList[row] = [];
       }
-      console.log("row: "+row+", list: "+this.designOrientedUserList);
       this.designOrientedUserList[row][(i+1)%3] = this.users[i];
     }
-    console.log(this.designOrientedUserList);
   }
 } 
