@@ -4,8 +4,6 @@ import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
-import com.google.gson.Gson;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -13,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
+@Secured
 @Path("/usernames")
 public class GetUsernames {
 
@@ -21,9 +20,9 @@ public class GetUsernames {
     @GET @Produces(MediaType.APPLICATION_JSON)
     public Response getUsernames(){
         String[] usernames = findUsernames();
-        Gson gson = new Gson();
+       // Gson gson = new Gson();
 
-        return Response.ok(gson.toJson(usernames)).build();
+        return Response.ok(usernames).build();
     }
 
     private String[] findUsernames(){

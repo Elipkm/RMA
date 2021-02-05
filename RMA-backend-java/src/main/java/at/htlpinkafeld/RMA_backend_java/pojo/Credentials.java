@@ -3,13 +3,15 @@ package at.htlpinkafeld.RMA_backend_java.pojo;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PossibleUser {
+import java.io.Serializable;
+
+public class Credentials implements Serializable {
 
     private String username,password;
 
     @JsonCreator
-    public PossibleUser(@JsonProperty("username") String username, @JsonProperty("password") String password) {
-        this.username = username;
+    public Credentials(@JsonProperty("username") String username, @JsonProperty("password") String password) {
+        this.username = username.toLowerCase();
         this.password = password;
     }
 
@@ -18,7 +20,7 @@ public class PossibleUser {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username.toLowerCase();
     }
 
     public String getPassword() {

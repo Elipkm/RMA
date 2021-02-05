@@ -25,8 +25,4 @@ public class PasswordEncoder {
     private void setEncodedPassword(String plainPassword) {
         this.encodedPassword = new Pbkdf2PasswordEncoder().encode(plainPassword);
     }
-
-
-
-
 }

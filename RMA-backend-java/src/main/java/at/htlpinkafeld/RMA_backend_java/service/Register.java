@@ -3,7 +3,7 @@ package at.htlpinkafeld.RMA_backend_java.service;
 import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
-import at.htlpinkafeld.RMA_backend_java.pojo.PossibleUser;
+import at.htlpinkafeld.RMA_backend_java.pojo.Credentials;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 
 import javax.ws.rs.Consumes;
@@ -22,9 +22,9 @@ public class Register {
     private UserDao userDao = DependencyInjector.getUserDAO();
 
     @POST @Consumes(MediaType.APPLICATION_JSON)
-    public Response register(final PossibleUser possibleUser){
+    public Response register(final Credentials credentials){
         try {
-            User user = new User(possibleUser.getUsername(), possibleUser.getPassword());
+            User user = new User(credentials.getUsername(), credentials.getPassword());
             userDao.create(user);
         } catch (DaoSysException daoException) {
             daoException.printStackTrace();
