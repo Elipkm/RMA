@@ -13,6 +13,8 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from './user.service';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     SignupComponent,
     MenueComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   providers: [
     AuthService,
+    UserService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

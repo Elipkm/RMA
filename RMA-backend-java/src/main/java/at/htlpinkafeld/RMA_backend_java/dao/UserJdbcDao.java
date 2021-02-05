@@ -14,7 +14,8 @@ public class UserJdbcDao extends BaseJdbcDao<User> implements UserDao {
 
     @Override
     protected User getPojoFromResultSet(ResultSet result) throws SQLException {
-        User u = new User(result.getString("Username"), result.getString("Password"));
+        User u = new User(result.getString("Username"), "");
+        u.setPassword(result.getString("Password"), true);
         u.setID(result.getInt(getPkName()));
         return u;
     }

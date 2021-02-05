@@ -28,7 +28,10 @@
 		<span>Ergebnisse</span>
 	</div>
 	<svg class="Profilbild">
-		<rect onclick="application.goToTargetView(event)" id="Profilbild" rx="15" ry="15" x="0" y="0" width="100"
+		<!--<rect onclick="application.goToTargetView(event)" id="Profilbild" rx="15" ry="15" x="0" y="0" width="100"
+			height="100">
+		</rect>-->
+		<rect (click)="_authService.logoutUser()" id="Profilbild" rx="15" ry="15" x="0" y="0" width="100"
 			height="100">
 		</rect>
 	</svg>

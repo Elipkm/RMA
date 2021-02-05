@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Context>
-    <!-- Must be corrected for mysql -->
+    <Resource name="jdbc/RMA"
+              auth="Container"
+              type="javax.sql.DataSource"
+              username="rma2021"
+              password="rma2021!&quot;"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://projekte.htlpinkafeld.at/rma2021"
+              maxWaitMillis="10000"
+              maxTotal="8"
+              maxIdle="4" />
+
+
+    <!-- Lokal MySQL Instance
     <Resource name="jdbc/RMA"
               auth="Container"
               type="javax.sql.DataSource"
               username="root"
               password="rootpassword"
-              driverClassName="com.mysql.jdbc.Driver"
+              driverClassName="com.mysql.cj.jdbc.Driver"
               url="jdbc:mysql://192.168.3.6:3306/RMA"
               maxWaitMillis="10000"
               maxTotal="8"
               maxIdle="4" />
-
+    -->
 </Context>

@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injector } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,16 @@ export class TokenInterceptorService implements HttpInterceptor {
   constructor(private injector: Injector) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    throw new Error('Method not implemented.');
+    let authService = this.injector.get(AuthService)
+    let tokenizedReq = req.clone({
+      setHeaders: {
+        /*Authorization: `Bearer ${authService.getToken()}`*/
+        Authorization: `${authService.getToken()}`
+      }
+    })
+
+    console.log(tokenizedReq);
+    return next.handle(tokenizedReq)
+    //return next.handle(req);
   }
 }

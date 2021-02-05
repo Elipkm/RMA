@@ -15,7 +15,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: '',
-    redirectTo: '/login',
+    redirectTo: '/menue',
     pathMatch: 'full'
   },
   { path: '**', component: PageNotFoundComponent }

@@ -9,7 +9,7 @@ import javax.ws.rs.ext.Provider;
 public class ResponseServerFilter implements ContainerResponseFilter {
 
     private final String[] allowedUrlsForCORS = new String[]{
-            "*"
+            "http://localhost:4200"
     };
 
     @Override
@@ -21,6 +21,8 @@ public class ResponseServerFilter implements ContainerResponseFilter {
         for(String allowedUrl : allowedUrlsForCORS){
             responseContext.getHeaders().add("Access-Control-Allow-Origin",allowedUrl);
         }
-        responseContext.getHeaders().add("Access-Control-Allow-Credentials","true");
+        //responseContext.getHeaders().add("Access-Control-Allow-Credentials","true");
+        responseContext.getHeaders().add("Access-Control-Allow-Headers", "Authorization");
+        responseContext.getHeaders().add("Access-Control-Allow-Headers", "Content-Type");
     }
 }
