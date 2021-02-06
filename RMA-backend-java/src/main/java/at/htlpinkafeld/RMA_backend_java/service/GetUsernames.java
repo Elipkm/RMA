@@ -4,6 +4,8 @@ import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
+import at.htlpinkafeld.RMA_backend_java.service.authentication.Secured;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -11,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
-@Secured
 @Path("/usernames")
 public class GetUsernames {
 

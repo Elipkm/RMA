@@ -1,4 +1,4 @@
-package at.htlpinkafeld.RMA_backend_java.service;
+package at.htlpinkafeld.RMA_backend_java.service.authentication;
 
 import io.jsonwebtoken.Jwts;
 import javax.annotation.Priority;

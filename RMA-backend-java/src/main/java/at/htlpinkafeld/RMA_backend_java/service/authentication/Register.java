@@ -1,4 +1,4 @@
-package at.htlpinkafeld.RMA_backend_java.service;
+package at.htlpinkafeld.RMA_backend_java.service.authentication;
 
 import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;

@@ -7,8 +7,9 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private _registerUrl = "http://localhost:8080/RMA/rma/register";
-  private _loginUrl = "http://localhost:8080/RMA/rma/login";
+  private _registerUrl = "http://localhost:8080/RMA_Restful_Service/rma/register";
+  private _loginUrl = "http://localhost:8080/RMA_Restful_Service/rma/login";
+
   constructor(private http: HttpClient,
               private _router: Router) { 
   }
@@ -18,7 +19,7 @@ export class AuthService {
   }
 
   loginUser(user){
-    return this.http.post<any>(this._loginUrl, user)
+    return this.http.post<any>(this._loginUrl, user);
   }
 
   loggedIn(){

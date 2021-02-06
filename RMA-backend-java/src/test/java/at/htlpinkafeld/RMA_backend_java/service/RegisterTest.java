@@ -1,6 +1,7 @@
 package at.htlpinkafeld.RMA_backend_java.service;
 
 import at.htlpinkafeld.RMA_backend_java.pojo.Credentials;
+import at.htlpinkafeld.RMA_backend_java.service.authentication.Register;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

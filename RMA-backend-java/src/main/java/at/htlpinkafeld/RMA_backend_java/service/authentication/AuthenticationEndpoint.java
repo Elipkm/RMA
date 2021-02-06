@@ -1,4 +1,4 @@
-package at.htlpinkafeld.RMA_backend_java.service;
+package at.htlpinkafeld.RMA_backend_java.service.authentication;
 
 import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.security.Key;
 
-@Path("/authentication")
+@Path("/login")
 public class AuthenticationEndpoint {
 
     public static final Key KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);

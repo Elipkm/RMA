@@ -1,4 +1,6 @@
-package at.htlpinkafeld.RMA_backend_java.service;
+package at.htlpinkafeld.RMA_backend_java.service.authentication;
+
+import at.htlpinkafeld.RMA_backend_java.service.authentication.Secured;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
