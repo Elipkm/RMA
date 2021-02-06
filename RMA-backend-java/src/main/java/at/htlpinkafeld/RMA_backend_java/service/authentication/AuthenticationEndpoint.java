@@ -25,7 +25,7 @@ public class AuthenticationEndpoint {
         try {
             authenticate(credentials.getUsername(), credentials.getPassword());
 
-            String token = issueToken(credentials.getUsername());
+            String token = AuthenticationEndpoint.issueToken(credentials.getUsername());
 
             return Response.ok(token).build();
         }catch (Exception ex){
@@ -43,7 +43,7 @@ public class AuthenticationEndpoint {
         }
         throw new Exception();
     }
-    private String issueToken(String username){
+    public static String issueToken(String username){
         return Jwts.builder().setSubject(username).signWith(KEY).compact();
     }
 }

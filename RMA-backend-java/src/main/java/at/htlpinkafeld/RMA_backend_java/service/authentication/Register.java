@@ -26,6 +26,9 @@ public class Register {
         try {
             User user = new User(credentials.getUsername(), credentials.getPassword());
             userDao.create(user);
+
+            String authenticationToken = AuthenticationEndpoint.issueToken(credentials.getUsername());
+            return Response.ok(authenticationToken).build();
         } catch (DaoSysException daoException) {
             daoException.printStackTrace();
             if(daoException.getErrorCode() == DaoSysException.UNIQUE_ERROR){
@@ -33,7 +36,5 @@ public class Register {
             }
             return Response.serverError().build();
         }
-
-        return Response.ok().build();
     }
 }
