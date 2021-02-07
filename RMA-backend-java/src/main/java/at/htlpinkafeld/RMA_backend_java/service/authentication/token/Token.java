@@ -3,7 +3,7 @@ package at.htlpinkafeld.RMA_backend_java.service.authentication.token;
 import java.util.Objects;
 
 public class Token {
-    private String token;
+    private final String token;
     Token(String token){
         this.token = token;
     }

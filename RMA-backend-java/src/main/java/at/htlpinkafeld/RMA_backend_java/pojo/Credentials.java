@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 public class Credentials implements Serializable {
 
@@ -11,7 +12,7 @@ public class Credentials implements Serializable {
 
     @JsonCreator
     public Credentials(@JsonProperty("username") String username, @JsonProperty("password") String password) {
-        this.username = username.toLowerCase();
+        this.username = username.toLowerCase(Locale.GERMAN);
         this.password = password;
     }
 
@@ -20,7 +21,7 @@ public class Credentials implements Serializable {
     }
 
     public void setUsername(String username) {
-        this.username = username.toLowerCase();
+        this.username = username.toLowerCase(Locale.GERMAN);
     }
 
     public String getPassword() {

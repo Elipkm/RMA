@@ -6,35 +6,35 @@ import io.jsonwebtoken.security.Keys;
 import java.security.Key;
 
 public class TokenJwts implements TokenGenerator, TokenProcessor {
-    public final Key KEY;
+    private final Key key;
 
     public TokenJwts(Key key){
-        this.KEY = key;
+        this.key = key;
     }
     public TokenJwts(){
-        this.KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        this.key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 
     @Override
     public Token issueToken(String username){
-        String token = Jwts.builder().setSubject(username).signWith(this.KEY).compact();
+        String token = Jwts.builder().setSubject(username).signWith(this.key).compact();
         return new Token(token);
     }
 
     @Override
     public Token validate(String token) throws InvalidTokenException {
         try {
-            Jwts.parserBuilder().setSigningKey(this.KEY).build().parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(this.key).build().parseClaimsJws(token);
 
             return new Token(token);
-        }catch (InvalidTokenException exception){
-            throw new InvalidTokenException();
+        }catch (Exception exception){
+            throw (InvalidTokenException) new InvalidTokenException().initCause(exception);
         }
     }
 
     @Override
     public String getUsernameFromToken(Token token) {
-        return Jwts.parserBuilder().setSigningKey(this.KEY).build()
+        return Jwts.parserBuilder().setSigningKey(this.key).build()
                 .parseClaimsJws(token.getToken())
                 .getBody()
                 .getSubject();

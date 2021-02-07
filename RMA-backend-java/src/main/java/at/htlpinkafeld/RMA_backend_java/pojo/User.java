@@ -60,14 +60,6 @@ public class User implements Identifiable {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + encodedPassword + '\'' +
-                ", id=" + id +
-                '}';
-    }
 
     @Override
     public int hashCode() {
