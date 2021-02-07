@@ -1,6 +1,7 @@
 package at.htlpinkafeld.RMA_backend_java.service.authentication;
 
 import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
+import at.htlpinkafeld.RMA_backend_java.service.authentication.token.InvalidTokenException;
 import at.htlpinkafeld.RMA_backend_java.service.authentication.token.Token;
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
@@ -37,7 +38,8 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
             String username = getUsernameFromToken(token);
             identifyUserViaSecurityContext(requestContext, username);
-        } catch (Exception e) {
+
+        } catch (InvalidTokenException invalidTokenException) {
             abortWithUnauthorized(requestContext);
         }
     }
@@ -58,7 +60,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                                 AUTHENTICATION_SCHEME + " realm=\"" + REALM + "\"")
                         .build());
     }
-    private Token validateToken(String tokenInQuestion) {
+    private Token validateToken(String tokenInQuestion) throws InvalidTokenException {
         // Check if the token was issued by the server and if it's not expired
         // Throw an Exception if the token is invalid
         // if tokenInQuestion is valid a token object is returned
