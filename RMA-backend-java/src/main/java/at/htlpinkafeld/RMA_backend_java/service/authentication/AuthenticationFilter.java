@@ -1,6 +1,7 @@
 package at.htlpinkafeld.RMA_backend_java.service.authentication;
 
-import io.jsonwebtoken.Jwts;
+import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
+import at.htlpinkafeld.RMA_backend_java.service.authentication.token.Token;
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -29,10 +30,10 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             return;
         }
 
-        String token = authorizationHeader.substring(AUTHENTICATION_SCHEME.length()).trim();
+        String tokenInQuestion = authorizationHeader.substring(AUTHENTICATION_SCHEME.length()).trim();
 
         try {
-            validateToken(token);
+            Token token = validateToken(tokenInQuestion);
 
             String username = getUsernameFromToken(token);
             identifyUserViaSecurityContext(requestContext, username);
@@ -57,17 +58,15 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                                 AUTHENTICATION_SCHEME + " realm=\"" + REALM + "\"")
                         .build());
     }
-    private void validateToken(String token) {
+    private Token validateToken(String tokenInQuestion) {
         // Check if the token was issued by the server and if it's not expired
         // Throw an Exception if the token is invalid
-        Jwts.parserBuilder().setSigningKey(AuthenticationEndpoint.KEY).build().parseClaimsJws(token);
+        // if tokenInQuestion is valid a token object is returned
+        return DependencyInjector.getTokenProcessor().validate(tokenInQuestion);
     }
 
-    private String getUsernameFromToken(String token){
-        return Jwts.parserBuilder().setSigningKey(AuthenticationEndpoint.KEY).build()
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+    private String getUsernameFromToken(Token token){
+        return DependencyInjector.getTokenProcessor().getUsernameFromToken(token);
     }
     private void identifyUserViaSecurityContext(ContainerRequestContext requestContext,String username){
         final SecurityContext currentSecurityContext = requestContext.getSecurityContext();

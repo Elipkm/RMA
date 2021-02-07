@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class UserService {
 
-  private _userListUrl = "http://localhost:8080/RMA/rma/usernames";
+  private _userListUrl = "http://localhost:8080/RMA_Restful_Service/rma/usernames";
   //private _userListUrl =  "https://jsonplaceholder.typicode.com/todos/";
   constructor(private http: HttpClient,
               private _router: Router) { 

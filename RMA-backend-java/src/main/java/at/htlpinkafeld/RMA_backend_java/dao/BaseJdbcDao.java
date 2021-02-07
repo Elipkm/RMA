@@ -51,7 +51,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
                 throw new DaoSysException("nothing was updated");
             }
         } catch (SQLException e) {
-            throw new DaoSysException(e.getMessage());
+            throw (DaoSysException) new DaoSysException(e.getMessage()).initCause(e);
         }
     }
 
@@ -68,7 +68,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
                 t = getPojoFromResultSet(result);
             }
         } catch (SQLException e) {
-            throw new DaoSysException(e.getMessage());
+            throw (DaoSysException) new DaoSysException(e.getMessage()).initCause(e);
         }
         return t;
     }
@@ -84,7 +84,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
                 results.add(getPojoFromResultSet(result));
             }
         } catch (SQLException e) {
-            throw new DaoSysException(e.getMessage());
+            throw (DaoSysException) new DaoSysException(e.getMessage()).initCause(e);
         }
         return results;
     }
@@ -101,7 +101,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
                 throw new DaoSysException("nothing was updated");
             }
         } catch (SQLException e) {
-            throw new DaoSysException(e.getMessage());
+            throw (DaoSysException) new DaoSysException(e.getMessage()).initCause(e);
         }
     }
 
@@ -118,7 +118,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
                 t.setID(generatedKeys.getInt(1));
             }
         } catch (SQLException e) {
-            throw new DaoSysException(e.getMessage(), e.getErrorCode());
+            throw (DaoSysException) new DaoSysException(e.getMessage(), e.getErrorCode()).initCause(e);
         }
     }
 }

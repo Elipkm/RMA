@@ -16,7 +16,7 @@ import java.util.ArrayList;
 @Path("/usernames")
 public class GetUsernames {
 
-    private UserDao userDao = DependencyInjector.getUserDAO();
+    private final UserDao userDao = DependencyInjector.getUserDAO();
 
     @GET @Produces(MediaType.APPLICATION_JSON)
     public Response getUsernames(){

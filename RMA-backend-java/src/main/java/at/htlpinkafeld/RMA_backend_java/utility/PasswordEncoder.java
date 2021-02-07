@@ -5,11 +5,12 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 public class PasswordEncoder {
 
     private String encodedPassword = "";
+    private final org.springframework.security.crypto.password.PasswordEncoder encoderTool;
 
     public PasswordEncoder(String plainPassword) {
+        this.encoderTool = new Pbkdf2PasswordEncoder();
         this.setEncodedPassword(plainPassword);
     }
-    public PasswordEncoder(){}
 
     public PasswordEncoder setPassword(String password) {
         this.setEncodedPassword(password);
@@ -20,9 +21,9 @@ public class PasswordEncoder {
         return encodedPassword;
     }
     public boolean matches(String plainPassword, String encodedPassword){
-        return new Pbkdf2PasswordEncoder().matches(plainPassword,encodedPassword);
+        return this.encoderTool.matches(plainPassword,encodedPassword);
     }
     private void setEncodedPassword(String plainPassword) {
-        this.encodedPassword = new Pbkdf2PasswordEncoder().encode(plainPassword);
+        this.encodedPassword = this.encoderTool.encode(plainPassword);
     }
 }

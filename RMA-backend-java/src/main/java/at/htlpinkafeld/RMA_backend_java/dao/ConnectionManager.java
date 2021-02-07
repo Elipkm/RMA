@@ -10,11 +10,13 @@ import java.sql.SQLException;
 public abstract class ConnectionManager {
     private volatile static ConnectionManager connectionManager = null;
 
-    public static synchronized ConnectionManager getInstance() throws SQLException {
-        if (connectionManager == null) {
-            connectionManager = new WebConnectionManager();
+    public static ConnectionManager getInstance() throws SQLException {
+        synchronized (ConnectionManager.class) {
+            if (connectionManager == null) {
+                connectionManager = new WebConnectionManager();
+            }
+            return connectionManager;
         }
-        return connectionManager;
     }
 
     public abstract WrappedConnection getWrappedConnection() throws SQLException;

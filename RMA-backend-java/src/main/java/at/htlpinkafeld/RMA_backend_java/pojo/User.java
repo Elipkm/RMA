@@ -3,18 +3,21 @@ package at.htlpinkafeld.RMA_backend_java.pojo;
 import at.htlpinkafeld.RMA_backend_java.dao.Identifiable;
 import at.htlpinkafeld.RMA_backend_java.utility.PasswordEncoder;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class User implements Identifiable {
 
     private String username;
     private String encodedPassword;
+    private final PasswordEncoder passwordEncoder;
 
     private int id = -1;
 
     public User(String username, String password) {
-        this.setUsername(username);
-        this.encodedPassword = new PasswordEncoder(password).getEncodedPassword();
+        this.setUsernameWithRightFormat(username);
+        this.passwordEncoder = new PasswordEncoder(password);
+        this.encodedPassword = passwordEncoder.getEncodedPassword();
     }
 
     public String getUsername() {
@@ -22,7 +25,10 @@ public class User implements Identifiable {
     }
 
     public void setUsername(String username) {
-        this.username = username.toLowerCase();
+        this.setUsernameWithRightFormat(username);
+    }
+    private void setUsernameWithRightFormat(String username){
+        this.username = username.toLowerCase(Locale.GERMAN);
     }
 
     public String getEncodedPassword() {
@@ -33,15 +39,13 @@ public class User implements Identifiable {
         if(isHashed) {
             this.encodedPassword = password;
         } else{
-            this.encodedPassword = new PasswordEncoder(password).getEncodedPassword();
+            this.encodedPassword = passwordEncoder.setPassword(password).getEncodedPassword();
         }
     }
 
     public boolean authenticate(String username,String plainPassword){
-        if(username.equals(this.username)){
-            if(new PasswordEncoder().matches(plainPassword,this.encodedPassword)){
-                return true;
-            }
+        if(username.equals(this.username) && passwordEncoder.matches(plainPassword, this.encodedPassword)){
+            return true;
         }
         return false;
     }
@@ -68,5 +72,13 @@ public class User implements Identifiable {
     @Override
     public int hashCode() {
         return Objects.hash(username, encodedPassword);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && username.equals(user.username);
     }
 }
