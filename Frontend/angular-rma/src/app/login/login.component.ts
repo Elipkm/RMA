@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       },
       err => {
         if(err.status === 403){
-          this._toastService.show('Das Passwort ist falsch!', {
+          this._toastService.show('Das Passwort oder der Benutzername ist falsch!', {
             classname: 'bg-warning text-light',
             delay: 4000 ,
             autohide: true,
@@ -78,10 +78,6 @@ export class LoginComponent implements OnInit {
 
   signUp(): void{
     this._router.navigate(['/signup'])
-  }
-
-  calculateTopStyleOfUserShortcut(i: number):number{
-    return 240+236*Math.floor((i/3));
   }
 
   open(content, selectedUser) {
