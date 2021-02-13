@@ -1,6 +1,7 @@
 package at.htlpinkafeld.RMA_backend_java;
 
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
+import at.htlpinkafeld.RMA_backend_java.dao.UserJdbcDao;
 import at.htlpinkafeld.RMA_backend_java.mock.UserDaoMock;
 import at.htlpinkafeld.RMA_backend_java.service.authentication.token.TokenGenerator;
 import at.htlpinkafeld.RMA_backend_java.service.authentication.token.TokenJwts;
@@ -9,8 +10,8 @@ import at.htlpinkafeld.RMA_backend_java.service.authentication.token.TokenProces
 public class DependencyInjector {
     private static UserDao userDaoMock = new UserDaoMock();
     public static UserDao getUserDAO(){
-        //return new UserJdbcDao(); //For using real mysql server config
-        return new UserDaoMock();
+        return new UserJdbcDao(); //For using real mysql server config
+        //return userDaoMock;
     }
 
     private static TokenJwts tokenJwts = new TokenJwts();

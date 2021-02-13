@@ -76,6 +76,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
     public final List<T> list() throws DaoSysException {
         List<T> results = new ArrayList<>();
         String sql = "SELECT * FROM " + TABLENAME;
+
         try (WrappedConnection wrCon = ConnectionManager.getInstance().getWrappedConnection();
              Statement statement = wrCon.getConn().createStatement();
             ResultSet result = statement.executeQuery(sql)) {

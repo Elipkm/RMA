@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="mysql-local" uuid="c66afe4c-d0f4-4ae6-a90f-8ad92edbcf2c">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://192.168.3.6:3306/</jdbc-url>
-    </data-source>
     <data-source source="LOCAL" name="mysql-htl" uuid="bcd8465d-5eca-4e70-8c05-91723dcb5c1f">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://projekte.htlpinkafeld.at:3306/rma2021</jdbc-url>
     </data-source>
