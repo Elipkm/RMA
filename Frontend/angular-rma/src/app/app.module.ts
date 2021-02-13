@@ -15,6 +15,8 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from './user.service';
 import { ToastComponent } from './toast/toast.component';
+import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
+import { LoadingScreenInterceptor } from './loading-screen.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { ToastComponent } from './toast/toast.component';
     SignupComponent,
     MenueComponent,
     PageNotFoundComponent,
-    ToastComponent
+    ToastComponent,
+    LoadingScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,11 @@ import { ToastComponent } from './toast/toast.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingScreenInterceptor,
       multi: true
     }
   ],
