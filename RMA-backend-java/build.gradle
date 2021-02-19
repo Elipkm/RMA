@@ -31,6 +31,10 @@ dependencies {
 
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.23'
 
+    // https://mvnrepository.com/artifact/org.glassfish.jersey.archetypes/project
+    implementation group: 'org.glassfish.jersey.archetypes', name: 'project', version: '3.0.1', ext: 'pom'
+
+
     compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.3.6.RELEASE'
 
     testCompile 'junit:junit:4.11'
@@ -49,6 +53,7 @@ dependencies {
             //'org.bouncycastle:bcprov-jdk15on:1.60',
             // for jackson  'io.jsonwebtoken:jjwt-jackson:0.11.2'
             'io.jsonwebtoken:jjwt-gson:0.11.2'
+
 }
 
 test {

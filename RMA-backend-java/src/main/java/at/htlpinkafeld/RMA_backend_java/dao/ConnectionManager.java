@@ -1,12 +1,8 @@
 package at.htlpinkafeld.RMA_backend_java.dao;
 
-import at.htlpinkafeld.RMA_backend_java.WrappedConnection;
-
 import javax.naming.Context;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public abstract class ConnectionManager {

@@ -1,9 +1,12 @@
-package at.htlpinkafeld.RMA_backend_java.service.authentication;
+package at.htlpinkafeld.RMA_backend_java.endpoint.authentication;
 
-import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
-import at.htlpinkafeld.RMA_backend_java.service.authentication.token.InvalidTokenException;
-import at.htlpinkafeld.RMA_backend_java.service.authentication.token.Token;
+import at.htlpinkafeld.RMA_backend_java.exception.InvalidAuthorizationHeaderException;
+import at.htlpinkafeld.RMA_backend_java.exception.InvalidTokenException;
+import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token.Token;
+import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token.TokenProcessor;
+
 import javax.annotation.Priority;
+import javax.inject.Inject;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -19,29 +22,34 @@ import java.security.Principal;
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
 
+    @Inject
+    private TokenProcessor tokenProcessor;
+
     private static final String REALM = "example";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
 
     @Override
-    public void filter(ContainerRequestContext requestContext) throws IOException {
+    public void filter(ContainerRequestContext requestContext) {
+        try {
+            String tokenInQuestion = this.getTokenStringFromRequest(requestContext);
+            Token token = this.validateToken(tokenInQuestion);
+            String username = this.getUsernameFromToken(token);
+            this.identifyUserViaSecurityContext(requestContext, username);
+
+        } catch (InvalidAuthorizationHeaderException | InvalidTokenException exception) {
+            exception.printStackTrace();
+            this.abortWithUnauthorized(requestContext);
+        }
+    }
+
+    private String getTokenStringFromRequest(ContainerRequestContext requestContext) throws InvalidAuthorizationHeaderException {
         String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
         if(!isTokenBasedAuthentication(authorizationHeader)){
-            abortWithUnauthorized(requestContext);
-            return;
+            throw new InvalidAuthorizationHeaderException();
         }
 
-        String tokenInQuestion = authorizationHeader.substring(AUTHENTICATION_SCHEME.length()).trim();
-
-        try {
-            Token token = validateToken(tokenInQuestion);
-
-            String username = getUsernameFromToken(token);
-            identifyUserViaSecurityContext(requestContext, username);
-
-        } catch (InvalidTokenException invalidTokenException) {
-            abortWithUnauthorized(requestContext);
-        }
+        return authorizationHeader.substring(AUTHENTICATION_SCHEME.length()).trim();
     }
 
     private boolean isTokenBasedAuthentication(String authorizationHeader) {
@@ -60,16 +68,15 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                                 AUTHENTICATION_SCHEME + " realm=\"" + REALM + "\"")
                         .build());
     }
+
     private Token validateToken(String tokenInQuestion) throws InvalidTokenException {
-        // Check if the token was issued by the server and if it's not expired
-        // Throw an Exception if the token is invalid
-        // if tokenInQuestion is valid a token object is returned
-        return DependencyInjector.getTokenProcessor().validate(tokenInQuestion);
+        return this.tokenProcessor.validate(tokenInQuestion);
     }
 
     private String getUsernameFromToken(Token token){
-        return DependencyInjector.getTokenProcessor().getUsernameFromToken(token);
+        return this.tokenProcessor.getUsernameFromToken(token);
     }
+
     private void identifyUserViaSecurityContext(ContainerRequestContext requestContext,String username){
         final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
         requestContext.setSecurityContext(new SecurityContext() {

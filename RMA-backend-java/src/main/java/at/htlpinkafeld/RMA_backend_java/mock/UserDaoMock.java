@@ -3,12 +3,14 @@ package at.htlpinkafeld.RMA_backend_java.mock;
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class UserDaoMock implements UserDao {
+
+    public UserDaoMock(){}
+
     private List<User> userList = new ArrayList<>(Arrays.asList(
             new User("Elias","secret"),
             new User("Daniel","secret"),

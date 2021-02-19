@@ -1,7 +1,6 @@
 package at.htlpinkafeld.RMA_backend_java.dao;
 
 
-import at.htlpinkafeld.RMA_backend_java.WrappedConnection;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 
 import java.sql.*;
