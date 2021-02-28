@@ -61,6 +61,13 @@ CREATE TABLE Participation (
 	PRIMARY KEY (RunnerID, EventID)
 );
 
+CREATE TABLE Ownership (
+	EventID INT,
+	UserID INT,
+	
+	PRIMARY KEY (EventID, UserID)
+);
+
 
 /*
 Foreign keys
@@ -76,3 +83,6 @@ ALTER TABLE Track ADD CONSTRAINT FK_Run_Track FOREIGN KEY (RunID) REFERENCES Run
 
 ALTER TABLE Participation ADD CONSTRAINT FK_Runner_Participation FOREIGN KEY (RunnerID) REFERENCES Runner(RunnerID);
 ALTER TABLE Participation ADD CONSTRAINT FK_Event_Participation FOREIGN KEY (EventID) REFERENCES Event(EventID);
+
+ALTER TABLE Ownership ADD CONSTRAINT FK_User_Ownership FOREIGN KEY (UserID) REFERENCES RMA_User(UserID);
+ALTER TABLE Ownership ADD CONSTRAINT FK_Event_Ownership FOREIGN KEY (EventID) REFERENCES Event(EventID);
