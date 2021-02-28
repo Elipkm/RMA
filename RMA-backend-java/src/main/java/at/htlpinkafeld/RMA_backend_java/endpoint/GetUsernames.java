@@ -1,11 +1,11 @@
-package at.htlpinkafeld.RMA_backend_java.service;
+package at.htlpinkafeld.RMA_backend_java.endpoint;
 
-import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
-import at.htlpinkafeld.RMA_backend_java.service.authentication.Secured;
+import java.util.List;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -16,25 +16,17 @@ import java.util.ArrayList;
 @Path("/usernames")
 public class GetUsernames {
 
-    private final UserDao userDao = DependencyInjector.getUserDAO();
+    @Inject
+    private UserDao userDao;
 
     @GET @Produces(MediaType.APPLICATION_JSON)
     public Response getUsernames(){
         String[] usernames = findUsernames();
-       // Gson gson = new Gson();
-
         return Response.ok(usernames).build();
     }
 
     private String[] findUsernames(){
-        java.util.List<User> userList;
-        try {
-            userList = userDao.list();
-        } catch (DaoSysException e) {
-            e.printStackTrace();
-            userList = new ArrayList<>(0);
-        }
-
+        List<User> userList = getUserList();
         String[] usernames = new String[userList.size()];
 
         for(int i = 0; i < userList.size(); i++){
@@ -42,5 +34,13 @@ public class GetUsernames {
         }
 
         return usernames;
+    }
+    private List<User> getUserList(){
+        try {
+            return userDao.list();
+        } catch (DaoSysException e) {
+            e.printStackTrace();
+            return new ArrayList<>(0);
+        }
     }
 }

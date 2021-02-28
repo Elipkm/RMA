@@ -1,29 +1,33 @@
-package at.htlpinkafeld.RMA_backend_java.service.authentication;
+package at.htlpinkafeld.RMA_backend_java.endpoint.authentication;
 
-import at.htlpinkafeld.RMA_backend_java.DependencyInjector;
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.Credentials;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
-import at.htlpinkafeld.RMA_backend_java.service.authentication.token.Token;
-import at.htlpinkafeld.RMA_backend_java.service.authentication.token.TokenGenerator;
+import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token.Token;
+import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token.TokenGenerator;
+
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/login")
-public class AuthenticationEndpoint {
+public class Login {
+
+    @Inject
+    private UserDao userDao;
+
+    @Inject
+    private TokenGenerator tokenGenerator;
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response authenticateUser(Credentials credentials) {
         try {
-            authenticate(credentials.getUsername(), credentials.getPassword());
-
-            TokenGenerator tokenGenerator = DependencyInjector.getTokenGenerator();
-            Token token = tokenGenerator.issueToken(credentials.getUsername());
-
+            this.authenticate(credentials.getUsername(), credentials.getPassword());
+            Token token = this.tokenGenerator.issueToken(credentials.getUsername());
             return Response.ok(token).build();
 
         }catch (ForbiddenException forbiddenException){
@@ -35,8 +39,7 @@ public class AuthenticationEndpoint {
     }
 
     private void authenticate(String username, String password) throws ForbiddenException, DaoSysException {
-        final UserDao userDao = DependencyInjector.getUserDAO();
-        java.util.List<User> userList = userDao.list();
+        java.util.List<User> userList = this.userDao.list();
         for(User user : userList){
             if(user.authenticate(username,password)){
                 return;

@@ -1,4 +1,4 @@
-package at.htlpinkafeld.RMA_backend_java.service.authentication;
+package at.htlpinkafeld.RMA_backend_java.endpoint.authentication;
 
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.ElementType;
