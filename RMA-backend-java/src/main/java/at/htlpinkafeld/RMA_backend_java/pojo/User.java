@@ -73,4 +73,14 @@ public class User implements Identifiable {
         User user = (User) o;
         return id == user.id && username.equals(user.username);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", encodedPassword='" + encodedPassword + '\'' +
+                ", passwordEncoder=" + passwordEncoder +
+                ", id=" + id +
+                '}';
+    }
 }

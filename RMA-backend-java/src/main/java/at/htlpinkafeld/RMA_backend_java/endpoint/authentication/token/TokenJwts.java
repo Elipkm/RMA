@@ -1,5 +1,6 @@
-package at.htlpinkafeld.RMA_backend_java.service.authentication.token;
+package at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token;
 
+import at.htlpinkafeld.RMA_backend_java.exception.InvalidTokenException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;

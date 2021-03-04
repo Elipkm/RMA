@@ -1,7 +1,6 @@
 package at.htlpinkafeld.RMA_backend_java.dao;
 
 
-import at.htlpinkafeld.RMA_backend_java.WrappedConnection;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 
 import java.sql.*;
@@ -76,6 +75,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
     public final List<T> list() throws DaoSysException {
         List<T> results = new ArrayList<>();
         String sql = "SELECT * FROM " + TABLENAME;
+
         try (WrappedConnection wrCon = ConnectionManager.getInstance().getWrappedConnection();
              Statement statement = wrCon.getConn().createStatement();
             ResultSet result = statement.executeQuery(sql)) {

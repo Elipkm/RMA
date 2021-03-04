@@ -1,4 +1,4 @@
-package at.htlpinkafeld.RMA_backend_java;
+package at.htlpinkafeld.RMA_backend_java.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
