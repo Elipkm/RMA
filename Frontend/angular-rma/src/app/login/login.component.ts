@@ -47,11 +47,11 @@ export class LoginComponent implements OnInit {
 
   logIn(): void{
     //login button click event triggered within login popup
-    console.log(this.selectedUser.password);
     this._authService.loginUser(this.selectedUser).subscribe(
       res => {
         console.log(res);
         localStorage.setItem('token', res.token);
+        localStorage.setItem('loggedInUsername', this.selectedUser.getUserName());
         this._router.navigate(['/menue']);
       },
       err => {
