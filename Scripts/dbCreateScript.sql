@@ -27,6 +27,8 @@ CREATE TABLE Runner (
 	RunnerID INT AUTO_INCREMENT,
 	FirstName VARCHAR(30) NOT NULL,
 	LastName VARCHAR(30) NOT NULL,
+	BirthDate DATE,
+	
 	PRIMARY KEY (RunnerID)
 );
 
