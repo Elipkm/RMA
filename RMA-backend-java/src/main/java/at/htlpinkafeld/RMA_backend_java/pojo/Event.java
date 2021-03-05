@@ -16,6 +16,7 @@ public class Event implements Identifiable {
     }
 
     public Event(int id, String name, Date startDate, Date endDate) {
+        this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;

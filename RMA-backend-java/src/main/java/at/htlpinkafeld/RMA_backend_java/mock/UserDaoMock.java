@@ -14,8 +14,8 @@ public class UserDaoMock implements UserDao {
     private List<User> userList = new ArrayList<>(Arrays.asList(
             new User("Elias","secret"),
             new User("Daniel","secret"),
-            new User("Markus","empire"),
-            new User("Lukas","wembley")
+            new User("Markus","secret"),
+            new User("Lukas","secret")
             ));
 
     private boolean isUnique(User user){

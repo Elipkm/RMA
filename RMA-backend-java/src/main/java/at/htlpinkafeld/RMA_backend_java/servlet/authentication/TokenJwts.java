@@ -23,7 +23,6 @@ public class TokenJwts implements TokenGenerator, TokenProcessor {
 
     @Override
     public Token validate(String token) throws InvalidTokenException {
-        System.out.println("Token: " + token + " Key: " + key.getEncoded());
         try {
             Jwts.parserBuilder().setSigningKey(this.key).build().parseClaimsJws(token);
 

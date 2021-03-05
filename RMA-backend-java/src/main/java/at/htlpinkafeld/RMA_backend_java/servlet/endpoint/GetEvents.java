@@ -5,6 +5,7 @@ import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
 import at.htlpinkafeld.RMA_backend_java.servlet.authentication.Secured;
 import at.htlpinkafeld.RMA_backend_java.pojo.Event;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
+import com.google.gson.Gson;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -33,6 +34,9 @@ public class GetEvents {
         User loggedInUser = userDao.getUserByUsername(username);
         List<Event> eventList = eventDao.list(loggedInUser);
 
-        return Response.ok(eventList).build();
+        Gson gson = new Gson();
+        String response = gson.toJson(eventList);
+
+        return Response.ok(response).build();
     }
 }

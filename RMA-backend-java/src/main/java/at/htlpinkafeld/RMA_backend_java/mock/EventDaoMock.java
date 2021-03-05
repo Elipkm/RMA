@@ -7,9 +7,7 @@ import at.htlpinkafeld.RMA_backend_java.pojo.Event;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class EventDaoMock implements EventDao {
     private List<Event> eventList = new ArrayList<>(Arrays.asList(
@@ -81,6 +79,12 @@ public class EventDaoMock implements EventDao {
 
     @Override
     public List<Event> list(User user) {
-        return new ArrayList<>(Arrays.asList(eventList.get(user.getID())));
+        Map<String,Event> orMapping = new HashMap<>();
+        orMapping.put("elias", eventList.get(0));
+        orMapping.put("daniel", eventList.get(1));
+        orMapping.put("markus", eventList.get(2));
+        orMapping.put("lukas", eventList.get(3));
+
+        return new ArrayList<>(Arrays.asList(orMapping.get(user.getUsername())));
     }
 }

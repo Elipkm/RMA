@@ -31,8 +31,9 @@ dependencies {
 
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.23'
 
-    // https://mvnrepository.com/artifact/org.glassfish.jersey.archetypes/project
     implementation group: 'org.glassfish.jersey.archetypes', name: 'project', version: '3.0.1', ext: 'pom'
+
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
 
 
     compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.3.6.RELEASE'

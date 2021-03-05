@@ -18,8 +18,9 @@ public class ApplicationBinder extends AbstractBinder {
         configureMockDao();
        // configureJdbcDao();
 
-        bind(TokenJwts.class).to(TokenGenerator.class);
-        bind(TokenJwts.class).to(TokenProcessor.class);
+        TokenJwts tokenJwts = new TokenJwts();
+        bind(tokenJwts).to(TokenGenerator.class);
+        bind(tokenJwts).to(TokenProcessor.class);
     }
 
     private void configureJdbcDao() {
