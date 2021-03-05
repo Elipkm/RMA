@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*
+Class for all account divs in the upper right corner
+*/
+
+@media only screen and (max-width: 800px) {
+    .accountDiv{
+        width: 100px !important;
+        height: 100px !important;
+    }
+    .accountDiv span{
+        font-size: 30px !important;
+    }
+  }
+
+.accountDiv{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 150px;
+    height: 150px;
+    background-color: rgba(206, 210, 210, 1);
+    border: rgba(112, 112, 112, 1);
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.accountDiv span{
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    padding-top: 25%;
+    padding-bottom: 25%;
+}
+
+.clickable{
+    cursor: pointer;
+}
