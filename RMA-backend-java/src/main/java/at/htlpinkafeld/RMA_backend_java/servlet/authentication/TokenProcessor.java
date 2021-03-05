@@ -1,6 +1,4 @@
-package at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token;
-
-import at.htlpinkafeld.RMA_backend_java.exception.InvalidTokenException;
+package at.htlpinkafeld.RMA_backend_java.servlet.authentication;
 
 public interface TokenProcessor {
     Token validate(String tokenInQuestion) throws InvalidTokenException;

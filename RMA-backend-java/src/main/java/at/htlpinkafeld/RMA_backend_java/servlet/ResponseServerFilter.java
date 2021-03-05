@@ -1,4 +1,4 @@
-package at.htlpinkafeld.RMA_backend_java.endpoint;
+package at.htlpinkafeld.RMA_backend_java.servlet;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;

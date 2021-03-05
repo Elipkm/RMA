@@ -4,6 +4,7 @@ package at.htlpinkafeld.RMA_backend_java.mock;
 import at.htlpinkafeld.RMA_backend_java.dao.EventDao;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.Event;
+import at.htlpinkafeld.RMA_backend_java.pojo.User;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -76,5 +77,10 @@ public class EventDaoMock implements EventDao {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Event> list(User user) {
+        return new ArrayList<>(Arrays.asList(eventList.get(user.getID())));
     }
 }

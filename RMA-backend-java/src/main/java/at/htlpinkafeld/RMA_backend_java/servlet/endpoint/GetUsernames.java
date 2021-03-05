@@ -1,10 +1,9 @@
-package at.htlpinkafeld.RMA_backend_java.endpoint;
+package at.htlpinkafeld.RMA_backend_java.servlet.endpoint;
 
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

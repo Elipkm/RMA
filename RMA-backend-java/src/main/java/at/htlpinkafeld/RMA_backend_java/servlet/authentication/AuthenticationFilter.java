@@ -1,9 +1,4 @@
-package at.htlpinkafeld.RMA_backend_java.endpoint.authentication;
-
-import at.htlpinkafeld.RMA_backend_java.exception.InvalidAuthorizationHeaderException;
-import at.htlpinkafeld.RMA_backend_java.exception.InvalidTokenException;
-import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token.Token;
-import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token.TokenProcessor;
+package at.htlpinkafeld.RMA_backend_java.servlet.authentication;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -14,7 +9,6 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
 import java.security.Principal;
 
 @Secured

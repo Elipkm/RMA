@@ -39,4 +39,9 @@ public class UserJdbcDao extends BaseJdbcDao<User> implements UserDao {
         statement.setString(2, u.getEncodedPassword());
         return  statement;
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return null;
+    }
 }

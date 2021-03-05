@@ -1,6 +1,5 @@
-package at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token;
+package at.htlpinkafeld.RMA_backend_java.servlet.authentication;
 
-import at.htlpinkafeld.RMA_backend_java.exception.InvalidTokenException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -24,6 +23,7 @@ public class TokenJwts implements TokenGenerator, TokenProcessor {
 
     @Override
     public Token validate(String token) throws InvalidTokenException {
+        System.out.println("Token: " + token + " Key: " + key.getEncoded());
         try {
             Jwts.parserBuilder().setSigningKey(this.key).build().parseClaimsJws(token);
 

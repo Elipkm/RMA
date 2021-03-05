@@ -1,6 +1,5 @@
 package at.htlpinkafeld.RMA_backend_java.pojo;
 
-import at.htlpinkafeld.RMA_backend_java.dao.Identifiable;
 import at.htlpinkafeld.RMA_backend_java.utility.PasswordEncoder;
 
 import java.util.Locale;

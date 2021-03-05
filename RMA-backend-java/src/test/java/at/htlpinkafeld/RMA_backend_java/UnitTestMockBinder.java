@@ -1,9 +1,9 @@
 package at.htlpinkafeld.RMA_backend_java;
 
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
-import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token.TokenGenerator;
-import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token.TokenJwts;
-import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token.TokenProcessor;
+import at.htlpinkafeld.RMA_backend_java.servlet.authentication.TokenGenerator;
+import at.htlpinkafeld.RMA_backend_java.servlet.authentication.TokenJwts;
+import at.htlpinkafeld.RMA_backend_java.servlet.authentication.TokenProcessor;
 import at.htlpinkafeld.RMA_backend_java.mock.UserDaoMock;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 

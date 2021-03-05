@@ -1,11 +1,11 @@
-package at.htlpinkafeld.RMA_backend_java.endpoint.authentication;
+package at.htlpinkafeld.RMA_backend_java.servlet.endpoint;
 
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.Credentials;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
-import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token.Token;
-import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token.TokenGenerator;
+import at.htlpinkafeld.RMA_backend_java.servlet.authentication.Token;
+import at.htlpinkafeld.RMA_backend_java.servlet.authentication.TokenGenerator;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

@@ -1,4 +1,4 @@
-package at.htlpinkafeld.RMA_backend_java;
+package at.htlpinkafeld.RMA_backend_java.servlet;
 
 public class AppConfig extends org.glassfish.jersey.server.ResourceConfig {
 

@@ -56,4 +56,14 @@ public class UserDaoMock implements UserDao {
     public List<User> list() {
         return userList;
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+        for(User user : userList){
+            if(user.getUsername().equals(username)){
+                return user;
+            }
+        }
+        return null;
+    }
 }

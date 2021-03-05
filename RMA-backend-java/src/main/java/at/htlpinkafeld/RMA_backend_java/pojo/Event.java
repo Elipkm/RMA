@@ -1,7 +1,5 @@
 package at.htlpinkafeld.RMA_backend_java.pojo;
 
-import at.htlpinkafeld.RMA_backend_java.dao.Identifiable;
-
 import java.sql.Date;
 
 public class Event implements Identifiable {
@@ -9,6 +7,7 @@ public class Event implements Identifiable {
     private String name;
     private Date startDate;
     private Date endDate;
+
 
     public Event(String name, Date startDate, Date endDate) {
         this.name = name;

@@ -1,8 +1,7 @@
-package at.htlpinkafeld.RMA_backend_java.endpoint;
+package at.htlpinkafeld.RMA_backend_java.servlet.endpoint;
 
 import at.htlpinkafeld.RMA_backend_java.UnitTestMockBinder;
 import at.htlpinkafeld.RMA_backend_java.pojo.Credentials;
-import at.htlpinkafeld.RMA_backend_java.endpoint.authentication.Register;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.BeforeEach;

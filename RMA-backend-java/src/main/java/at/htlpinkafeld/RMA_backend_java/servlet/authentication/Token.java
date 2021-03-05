@@ -1,4 +1,4 @@
-package at.htlpinkafeld.RMA_backend_java.endpoint.authentication.token;
+package at.htlpinkafeld.RMA_backend_java.servlet.authentication;
 
 import java.util.Objects;
 

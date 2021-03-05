@@ -1,8 +1,10 @@
 package at.htlpinkafeld.RMA_backend_java.dao;
 
 import at.htlpinkafeld.RMA_backend_java.pojo.Event;
+import at.htlpinkafeld.RMA_backend_java.pojo.User;
 
 import java.sql.*;
+import java.util.List;
 
 public class EventJdbcDao extends BaseJdbcDao<Event> implements EventDao {
 
@@ -39,5 +41,10 @@ public class EventJdbcDao extends BaseJdbcDao<Event> implements EventDao {
         statement.setDate(2, e.getStartDate());
         statement.setDate(3, e.getEndDate());
         return  statement;
+    }
+
+    @Override
+    public List<Event> list(User user) {
+        return null;
     }
 }
