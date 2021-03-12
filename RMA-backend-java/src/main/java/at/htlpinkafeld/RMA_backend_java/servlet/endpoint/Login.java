@@ -30,22 +30,22 @@ public class Login {
             Token token = this.tokenGenerator.issueToken(credentials.getUsername());
             return Response.ok(token).build();
 
-        }catch (ForbiddenException forbiddenException){
-            return Response.status(Response.Status.FORBIDDEN).build();
+        }catch (NotAuthorizedException forbiddenException){
+            return forbiddenException.getResponse();
 
         } catch (DaoSysException daoSysException){
             return Response.status(500,daoSysException.getMessage()).build();
         }
     }
 
-    private void authenticate(String username, String password) throws ForbiddenException, DaoSysException {
+    private void authenticate(String username, String password) throws NotAuthorizedException, DaoSysException {
         java.util.List<User> userList = this.userDao.list();
         for(User user : userList){
             if(user.authenticate(username,password)){
                 return;
             }
         }
-        throw new ForbiddenException();
+        throw new NotAuthorizedException(Response.status(Response.Status.UNAUTHORIZED).build());
     }
 
 }
