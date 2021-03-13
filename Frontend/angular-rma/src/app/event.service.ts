@@ -6,15 +6,17 @@ import { RmaConstants } from './rma-constants';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class EventService {
 
-  private _userListUrl = this._rmaConstants.backEndMainRoute+"/usernames";
+  private _eventsUrl = this._rmaConstants.backEndMainRoute+"/event/list";
+
   constructor(private http: HttpClient,
               private _router: Router,
               private _rmaConstants: RmaConstants) { 
   }
 
-  listUsers(){
-    return this.http.get<any>(this._userListUrl);
+  getEvents(){
+    return this.http.get<any>(this._eventsUrl);
   }
 }
+

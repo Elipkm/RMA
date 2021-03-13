@@ -2,17 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/User';
+import { RmaConstants } from './rma-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private _registerUrl = "http://localhost:8080/RMA_Restful_Service/rma/register";
-  private _loginUrl = "http://localhost:8080/RMA_Restful_Service/rma/login";
+  private _registerUrl = this._rmaConstants.backEndMainRoute+"/register";
+  private _loginUrl = this._rmaConstants.backEndMainRoute+"/login";
 
   constructor(private http: HttpClient,
-              private _router: Router) { 
+              private _router: Router,
+              private _rmaConstants: RmaConstants) { 
   }
 
   registerUser(user){

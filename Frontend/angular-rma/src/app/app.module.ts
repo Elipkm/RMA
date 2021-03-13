@@ -17,6 +17,7 @@ import { UserService } from './user.service';
 import { ToastComponent } from './toast/toast.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 import { LoadingScreenInterceptor } from './loading-screen.interceptor';
+import { ContestSelectionComponent } from './contest-selection/contest-selection.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LoadingScreenInterceptor } from './loading-screen.interceptor';
     MenueComponent,
     PageNotFoundComponent,
     ToastComponent,
-    LoadingScreenComponent
+    LoadingScreenComponent,
+    ContestSelectionComponent
   ],
   imports: [
     BrowserModule,

@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
         localStorage.setItem('token', res.token);
         localStorage.setItem('loggedInUsername', this.selectedUser.getUserName());
-        this._router.navigate(['/menue']);
+        this._router.navigate(['/menu']);
       },
       err => {
         if(err.status === 403){
