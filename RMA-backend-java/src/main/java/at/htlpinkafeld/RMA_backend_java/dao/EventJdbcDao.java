@@ -1,5 +1,8 @@
 package at.htlpinkafeld.RMA_backend_java.dao;
 
+import at.htlpinkafeld.RMA_backend_java.exception.DaoNotFoundException;
+import at.htlpinkafeld.RMA_backend_java.exception.DaoResourceAlreadyExistsException;
+import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.Event;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 
@@ -46,5 +49,25 @@ public class EventJdbcDao extends BaseJdbcDao<Event> implements EventDao {
     @Override
     public List<Event> list(User user) {
         return null;
+    }
+
+    @Override
+    public void create(User user, Event event){
+
+    }
+
+    @Override
+    public Event read(User user, int id) throws DaoNotFoundException {
+        return null;
+    }
+
+    @Override
+    public void update(User user, Event event) throws DaoNotFoundException {
+
+    }
+
+    @Override
+    public void delete(User user, Event event) throws DaoNotFoundException {
+
     }
 }

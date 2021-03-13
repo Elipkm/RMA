@@ -1,22 +1,27 @@
 package at.htlpinkafeld.RMA_backend_java.pojo;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Date;
 
 public class Event implements Identifiable {
-    private int id = -1;
+    private int id;
     private String name;
     private Date startDate;
     private Date endDate;
 
-
-    public Event(String name, Date startDate, Date endDate) {
+    @JsonCreator
+    public Event(@JsonProperty("id") int id, @JsonProperty("name") String name,
+                 @JsonProperty("startDate") Date startDate, @JsonProperty("endDate") Date endDate){
+        this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public Event(int id, String name, Date startDate, Date endDate) {
-        this.id = id;
+    public Event(String name, Date startDate, Date endDate) {
+        this.id = -1;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;

@@ -29,7 +29,7 @@ public class ApplicationBinder extends AbstractBinder {
     }
 
     private void configureMockDao() {
-        bind(UserDaoMock.class).to(UserDao.class);
-        bind(EventDaoMock.class).to(EventDao.class);
+        bind(new UserDaoMock()).to(UserDao.class);
+        bind(new EventDaoMock()).to(EventDao.class);
     }
 }
