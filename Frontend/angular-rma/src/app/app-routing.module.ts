@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
-import { ContestSelectionComponent } from './contest-selection/contest-selection.component';
+import { EventSelectionComponent } from './event-selection/event-selection.component';
 import { LoginComponent } from './login/login.component';
 import { MenueComponent } from './menue/menue.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -16,12 +16,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'contest',
+    path: 'event',
     canActivate: [AuthGuard],
     children: [
       {
         path: 'selection',
-        component: ContestSelectionComponent,
+        component: EventSelectionComponent,
       }
     ]
   },

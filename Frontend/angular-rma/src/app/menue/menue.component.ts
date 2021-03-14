@@ -19,7 +19,7 @@ export class MenueComponent implements OnInit {
   }
 
   newRun(): void{
-    this._router.navigate(['/contest/selection']);
+    this._router.navigate(['/event/selection']);
   }
 
   results(): void{

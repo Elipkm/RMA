@@ -38,7 +38,8 @@
                         </div>
                         <div class="Rechteck" *ngIf="event">
                             <!--user!=null -> userField-->
-                            <div class="event_field" (click)="setSelectedEvent(event)">
+                            <div class="event_field" (click)="setSelectedEvent(event)"
+                                [ngClass]="{'selected_event': selectedEvent == event}">
                                 <span>{{ event.name }}</span>
                             </div>
                         </div>

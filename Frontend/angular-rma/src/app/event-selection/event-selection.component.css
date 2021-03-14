@@ -98,3 +98,10 @@
     height: 100%;
     width: 100%;
 }
+
+.selected_event{
+  border:  rgb(0,74,143,1);
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 5px;
+}

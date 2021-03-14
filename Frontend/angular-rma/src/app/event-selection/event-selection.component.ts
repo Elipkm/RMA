@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/User';
 import { AuthService } from '../auth.service';
 import { EventService } from '../event.service';
 import { ToastService } from '../toast.service';
 import { Event } from '../../Event';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-contest-selection',
-  templateUrl: './contest-selection.component.html',
-  styleUrls: ['./contest-selection.component.css']
+  selector: 'app-event-selection',
+  templateUrl: './event-selection.component.html',
+  styleUrls: ['./event-selection.component.css']
 })
-export class ContestSelectionComponent implements OnInit {
+export class EventSelectionComponent implements OnInit {
   user: User;
   events: Array<Event> = [];
   designOrientedEventList: Event[][] = [];
@@ -81,5 +81,4 @@ export class ContestSelectionComponent implements OnInit {
   editEvent():void{
 
   }
-
 }
