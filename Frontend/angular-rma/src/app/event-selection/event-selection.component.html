@@ -1,0 +1,72 @@
+<div>
+    <header>
+        <div id="event_selection_heading">
+            <div class="row">
+                <div class="col-sm-2">
+                    <img id="logo_large" src="assets/images/logo_large.png"
+                        srcset="assets/images/logo_large.png 1x, assets/images/logo_large@2x.png 2x">
+                </div>
+                <div id="EventSelection" class="col-sm-8">
+                    <span>Bewerbauswahl</span>
+                </div>
+                <div class="col-sm-2">
+
+                </div>
+            </div>
+            <div class="row">
+                <div id="blue_line" class="col-sm-8">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--Statically positioned in styles.css-->
+    <div class="accountDiv clickable" (click)="logOut()">
+        <span>{{ user.getUserName().substring(0,4) }}</span>
+    </div>
+
+
+    <div id="event_selection_body">
+        <div class="row" *ngFor="let eventsGroup of designOrientedEventList">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="row eventListRow">
+                    <div class="col-sm-4" *ngFor="let event of eventsGroup">
+                        <div class="Rechteck" *ngIf="!event">
+                            <!--user==null -> plusButton-->
+                            <img id="plusButton" (click)="signUp()" src="assets/images/plus-icon.png">
+                        </div>
+                        <div class="Rechteck" *ngIf="event">
+                            <!--user!=null -> userField-->
+                            <div class="event_field" (click)="setSelectedEvent(event)"
+                                [ngClass]="{'selected_event': selectedEvent == event}">
+                                <span>{{ event.name }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+    
+    <div id="event_selection_footer">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-4">
+                <button class="btn btn-dark footer_button" (click)="back()">Zurück</button>
+            </div>
+            <div class="col-md-4 col-sm-4 col-4">
+                <button class="btn btn-secondary footer_button" [ngClass]="{'disabled': !selectedEvent}"
+                    (click)="editEvent()">
+                    Bearbeiten
+                </button>
+            </div>
+            <div class="col-md-4 col-sm-4 col-4">
+                <button class="btn btn-primary footer_button" [ngClass]="{'disabled': !selectedEvent}"
+                    (click)="confirmAndOpenEvent()">
+                    Bestätigen
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

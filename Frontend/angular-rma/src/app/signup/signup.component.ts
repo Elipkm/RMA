@@ -25,7 +25,8 @@ export class SignupComponent implements OnInit {
     this._authService.registerUser(this.tempUser).subscribe(
       res => {
         localStorage.setItem('token', res.token);
-        this._router.navigate(['/menue']);
+        localStorage.setItem('loggedInUsername', this.tempUser.getUserName());
+        this._router.navigate(['/menu']);
       },
       err => {
         if(err.status === 409){
