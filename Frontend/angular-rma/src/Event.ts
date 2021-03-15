@@ -1,39 +1,39 @@
 export class Event{
 
-    constructor(private _id: number, private _name: string,
-                private _startDate: Date, private _endDate: Date){
+    constructor(private id: number, private name: string,
+                private startDate: Date, private endDate: Date){
     }
 
-    get id(){
-        return this._id;
+    get ID(){
+        return this.id;
     }
 
-    set id(id: number){
-        this._id = id;
+    set ID(id: number){
+        this.id = id;
     }
 
-    get name(){
-        return this._name;
+    get Name(){
+        return this.name;
     }
 
-    set name(name: string){
-        this._name = name;
+    set Name(name: string){
+        this.name = name;
     }
 
-    get startDate(){
-        return this._startDate;
+    get StartDate(){
+        return this.startDate;
     }
 
-    set startDate(startDate: Date){
-        this._startDate = startDate;
+    set StartDate(startDate: Date){
+        this.startDate = startDate;
     }
 
-    get endDate(){
-        return this._endDate;
+    get EndDate(){
+        return this.endDate;
     }
 
-    set endDate(endDate: Date){
-        this._endDate = endDate;
+    set EndDate(endDate: Date){
+        this.endDate = endDate;
     }
 
     public static eventOfObject(object: any): Event{

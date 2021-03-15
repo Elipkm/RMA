@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
+import { EventCreationComponent } from './event-creation/event-creation.component';
 import { EventSelectionComponent } from './event-selection/event-selection.component';
 import { LoginComponent } from './login/login.component';
 import { MenueComponent } from './menue/menue.component';
@@ -21,7 +22,11 @@ const routes: Routes = [
     children: [
       {
         path: 'selection',
-        component: EventSelectionComponent,
+        component: EventSelectionComponent
+      },
+      {
+        path: 'creation',
+        component: EventCreationComponent
       }
     ]
   },
