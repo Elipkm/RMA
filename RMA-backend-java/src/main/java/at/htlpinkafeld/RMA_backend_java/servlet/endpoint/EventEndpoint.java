@@ -11,6 +11,8 @@ import at.htlpinkafeld.RMA_backend_java.pojo.Event;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 
 import javax.inject.Inject;
@@ -41,7 +43,13 @@ public class EventEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(final Event event){
         eventDao.create(getLoggedInUser(), event);
-        return Response.created(URI.create("/RMA_Restful_Service/rma/event/" + event.getID())).build();
+        JsonObject json = new JsonObject();
+        json.add("id",new JsonPrimitive(event.getID()));
+
+        return Response.ok(json.toString())
+                .status(Response.Status.CREATED)
+                .header("Location", "/RMA_Restful_Service/rma/event/" + event.getID())
+                .build();
     }
 
     @GET
