@@ -9,6 +9,7 @@ import at.htlpinkafeld.RMA_backend_java.servlet.ApplicationBinder;
 import at.htlpinkafeld.RMA_backend_java.servlet.authentication.Secured;
 import at.htlpinkafeld.RMA_backend_java.pojo.Event;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
+import at.htlpinkafeld.RMA_backend_java.utility.JWTUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -35,7 +36,7 @@ public class EventEndpoint {
     @Context private ContainerRequestContext containerRequestContext;
 
     private User getLoggedInUser(){
-        String username = containerRequestContext.getSecurityContext().getUserPrincipal().getName();
+        String username = JWTUtils.getLoggedInUsername(containerRequestContext);
         return userDao.getUserByUsername(username);
     }
 
