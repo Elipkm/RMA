@@ -46,6 +46,13 @@ export class EventCreationComponent implements OnInit {
             autohide: true,
             headertext: 'Warning'
           })
+        }else if(err.status === 440){
+          this._toastService.show('Ihre Session is abgelaufen, bitte loggen Sie sich erneut ein!', {
+            classname: 'bg-warning text-light',
+            delay: 4000 ,
+            autohide: true,
+            headertext: 'Warning'
+          })
         }else{
           this._toastService.show('Es ist ein unbekannter Fehler aufgetreten!', {
             classname: 'bg-danger text-light',
