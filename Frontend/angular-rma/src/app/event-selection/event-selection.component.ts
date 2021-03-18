@@ -70,6 +70,10 @@ export class EventSelectionComponent implements OnInit {
     this.selectedEvent = event;
   }
 
+  createNewEvent():void{
+    this._router.navigate(['/event/creation']);
+  }
+
   back():void{
     this._router.navigate(["/menu"]);
   }

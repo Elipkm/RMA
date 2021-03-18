@@ -18,6 +18,8 @@ import { ToastComponent } from './toast/toast.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 import { LoadingScreenInterceptor } from './loading-screen.interceptor';
 import { EventSelectionComponent } from './event-selection/event-selection.component';
+import { EventCreationComponent } from './event-creation/event-creation.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,14 +30,16 @@ import { EventSelectionComponent } from './event-selection/event-selection.compo
     PageNotFoundComponent,
     ToastComponent,
     LoadingScreenComponent,
-    EventSelectionComponent
+    EventSelectionComponent,
+    EventCreationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,

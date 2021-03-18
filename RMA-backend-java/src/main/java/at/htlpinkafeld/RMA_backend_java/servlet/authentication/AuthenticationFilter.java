@@ -1,5 +1,7 @@
 package at.htlpinkafeld.RMA_backend_java.servlet.authentication;
 
+import io.jsonwebtoken.ExpiredJwtException;
+
 import javax.annotation.Priority;
 import javax.inject.Inject;
 import javax.ws.rs.Priorities;
@@ -30,9 +32,11 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             String username = this.getUsernameFromToken(token);
             this.identifyUserViaSecurityContext(requestContext, username);
 
+        } catch (ExpiredJwtException e) {
+            this.abortWithUnauthorized(requestContext, 440);
+
         } catch (InvalidAuthorizationHeaderException | InvalidTokenException exception) {
-            exception.printStackTrace();
-            this.abortWithUnauthorized(requestContext);
+            this.abortWithUnauthorized(requestContext, Response.Status.UNAUTHORIZED.getStatusCode());
         }
     }
 
@@ -53,17 +57,17 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         return authorizationHeader != null && authorizationHeader.toLowerCase()
                 .startsWith(AUTHENTICATION_SCHEME.toLowerCase() + " ");
     }
-    private void abortWithUnauthorized(ContainerRequestContext requestContext) {
+    private void abortWithUnauthorized(ContainerRequestContext requestContext, int statusCode) {
         // Abort the filter chain with a 401 status code response
         // The WWW-Authenticate header is sent along with the response
         requestContext.abortWith(
-                Response.status(Response.Status.UNAUTHORIZED)
+                Response.status(statusCode)
                         .header(HttpHeaders.WWW_AUTHENTICATE,
                                 AUTHENTICATION_SCHEME + " realm=\"" + REALM + "\"")
                         .build());
     }
 
-    private Token validateToken(String tokenInQuestion) throws InvalidTokenException {
+    private Token validateToken(String tokenInQuestion) throws InvalidTokenException, ExpiredJwtException {
         return this.tokenProcessor.validate(tokenInQuestion);
     }
 

@@ -34,7 +34,7 @@
                     <div class="col-sm-4" *ngFor="let event of eventsGroup">
                         <div class="Rechteck" *ngIf="!event">
                             <!--user==null -> plusButton-->
-                            <img id="plusButton" (click)="signUp()" src="assets/images/plus-icon.png">
+                            <img id="plusButton" (click)="createNewEvent()" src="assets/images/plus-icon.png">
                         </div>
                         <div class="Rechteck" *ngIf="event">
                             <!--user!=null -> userField-->
