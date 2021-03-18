@@ -2,8 +2,10 @@ package at.htlpinkafeld.RMA_backend_java.dao;
 
 
 
+import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 
+import java.awt.*;
 import java.sql.*;
 
 public class UserJdbcDao extends BaseJdbcDao<User> implements UserDao {
@@ -40,8 +42,15 @@ public class UserJdbcDao extends BaseJdbcDao<User> implements UserDao {
         return  statement;
     }
 
+    // TODO - to be tested
     @Override
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(String username) throws DaoSysException {
+        java.util.List<User> userList = super.list();
+        for(User user : userList){
+            if(user.getUsername().equals(username)){
+                return user;
+            }
+        }
         return null;
     }
 }

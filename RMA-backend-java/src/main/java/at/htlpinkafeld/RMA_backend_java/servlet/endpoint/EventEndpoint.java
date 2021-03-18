@@ -34,15 +34,22 @@ public class EventEndpoint {
 
     @Context private ContainerRequestContext containerRequestContext;
 
-    private User getLoggedInUser(){
+    private User getLoggedInUser() throws DaoSysException {
         String username = containerRequestContext.getSecurityContext().getUserPrincipal().getName();
         return userDao.getUserByUsername(username);
+    }
+    private Response responseDueToDaoException(DaoSysException daoSysException){
+        return Response.ok(daoSysException.getMessage()).status(500).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(final Event event){
-        eventDao.create(getLoggedInUser(), event);
+        try {
+            eventDao.create(getLoggedInUser(), event);
+        } catch (DaoSysException daoSysException) {
+           return responseDueToDaoException(daoSysException);
+        }
         JsonObject json = new JsonObject();
         json.add("id",new JsonPrimitive(event.getID()));
 
@@ -57,7 +64,12 @@ public class EventEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response read(@PathParam("id") int id){
         try{
-            Event event = eventDao.read(getLoggedInUser(), id);
+            Event event = null;
+            try {
+                event = eventDao.read(getLoggedInUser(), id);
+            } catch (DaoSysException daoSysException) {
+                return responseDueToDaoException(daoSysException);
+            }
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             String response = gson.toJson(event);
 
@@ -73,7 +85,11 @@ public class EventEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response update(final Event event){
         try {
-            eventDao.update(getLoggedInUser(), event);
+            try {
+                eventDao.update(getLoggedInUser(), event);
+            } catch (DaoSysException daoSysException) {
+                return responseDueToDaoException(daoSysException);
+            }
             return Response.ok().build();
         } catch (DaoNotFoundException notFoundException) {
             notFoundException.printStackTrace();
@@ -86,7 +102,11 @@ public class EventEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") int id){
         try {
-            eventDao.delete(getLoggedInUser(), eventDao.read(getLoggedInUser(), id));
+            try {
+                eventDao.delete(getLoggedInUser(), eventDao.read(getLoggedInUser(), id));
+            } catch (DaoSysException daoSysException) {
+                return responseDueToDaoException(daoSysException);
+            }
             return Response.status(200).build();
 
         } catch (DaoNotFoundException notFoundException){
@@ -99,8 +119,13 @@ public class EventEndpoint {
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEvents(){
-        User loggedInUser = getLoggedInUser();
-        List<Event> eventList = eventDao.list(loggedInUser);
+        List<Event> eventList;
+        try {
+            User loggedInUser = getLoggedInUser();
+            eventList = eventDao.list(loggedInUser);
+        } catch (DaoSysException daoSysException) {
+            return responseDueToDaoException(daoSysException);
+        }
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         String response = gson.toJson(eventList);

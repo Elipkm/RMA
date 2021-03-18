@@ -7,6 +7,7 @@ import at.htlpinkafeld.RMA_backend_java.pojo.Event;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventJdbcDao extends BaseJdbcDao<Event> implements EventDao {
@@ -47,8 +48,24 @@ public class EventJdbcDao extends BaseJdbcDao<Event> implements EventDao {
     }
 
     @Override
-    public List<Event> list(User user) {
-        return null;
+    public List<Event> list(User user) throws DaoSysException {
+        try (WrappedConnection wrCon = ConnectionManager.getInstance().getWrappedConnection();
+             Statement statement = wrCon.getConn().createStatement();
+             ResultSet result = statement.executeQuery("SELECT EventID FROM Ownership WHERE UserID = " + user.getID())) {
+
+            List<Event> results = new ArrayList<>();
+
+            while (result.next()) {
+                String eventId = result.getString("EventID");
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM Event WHERE EventID = " + eventId);
+
+                results.add(getPojoFromResultSet(resultSet));
+            }
+            return results;
+
+        } catch (SQLException e) {
+            throw (DaoSysException) new DaoSysException(e.getMessage()).initCause(e);
+        }
     }
 
     @Override
