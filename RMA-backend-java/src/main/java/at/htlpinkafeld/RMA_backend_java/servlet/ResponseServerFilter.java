@@ -9,7 +9,8 @@ import javax.ws.rs.ext.Provider;
 public class ResponseServerFilter implements ContainerResponseFilter {
 
     private final String[] allowedUrlsForCORS = new String[]{
-            "http://localhost:4200"
+            //"http://localhost:4200",
+            "*"
     };
 
     @Override

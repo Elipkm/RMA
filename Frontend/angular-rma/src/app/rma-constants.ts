@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
   })
 export class RmaConstants {
   private _backEndMainRoute: string = "http://localhost:8080/RMA/rma";
+  private _tokenExpiryTimeSeconds: number = 7200; //2h
   
   RmaConstants(){
 
@@ -12,5 +13,9 @@ export class RmaConstants {
 
   get backEndMainRoute():string{
       return this._backEndMainRoute;
+  }
+
+  get tokenExpiryTimeSeconds(): number{
+    return this._tokenExpiryTimeSeconds;
   }
 }
