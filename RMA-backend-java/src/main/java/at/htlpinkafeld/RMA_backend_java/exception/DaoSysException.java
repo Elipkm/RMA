@@ -6,17 +6,4 @@ public class DaoSysException extends Exception {
         super(message);
     }
 
-    public DaoSysException(String message, int errorCode) {
-        super(message);
-        this.errorCode = errorCode;
-    }
-
-    // TODO: resolve sql depencdeny
-    public static final int UNIQUE_ERROR = 1062;
-
-    private int errorCode = -1;
-
-    public int getErrorCode() {
-        return errorCode;
-    }
 }

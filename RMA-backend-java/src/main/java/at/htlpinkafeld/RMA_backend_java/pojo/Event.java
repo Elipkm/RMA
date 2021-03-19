@@ -11,8 +11,6 @@ public class Event implements Identifiable {
     private Date startDate;
     private Date endDate;
 
-    // TODO there can only be one json creator
-
     @JsonCreator
     public Event(@JsonProperty("id") String id, @JsonProperty("name") String name,
                  @JsonProperty("startDate") Date startDate, @JsonProperty("endDate") Date endDate){

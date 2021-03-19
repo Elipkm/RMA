@@ -119,7 +119,7 @@ public abstract class BaseJdbcDao<T extends Identifiable>{
                 t.setID(generatedKeys.getInt(1));
             }
         } catch (SQLException e) {
-            throw (DaoSysException) new DaoSysException(e.getMessage(), e.getErrorCode()).initCause(e);
+            throw (DaoSysException) new DaoSysException(e.getMessage()).initCause(e);
         }
     }
 }
