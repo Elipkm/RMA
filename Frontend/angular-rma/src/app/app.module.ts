@@ -20,6 +20,7 @@ import { LoadingScreenInterceptor } from './loading-screen.interceptor';
 import { EventSelectionComponent } from './event-selection/event-selection.component';
 import { EventCreationComponent } from './event-creation/event-creation.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [

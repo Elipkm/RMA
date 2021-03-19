@@ -19,10 +19,10 @@ public class TokenJwts implements TokenGenerator, TokenProcessor {
 
     @Override
     public Token issueToken(String username){
-        final int expTimeInMins = 4;
+        //final int expTimeInMins = 4;
         //TODO change expTime to production
         //production time
-        //final int expTimeInMins = 120;
+        final int expTimeInMins = 120;
         final int expTimeInMills = expTimeInMins * 60000;
 
         Date expDate = new Date(System.currentTimeMillis() + expTimeInMills);
