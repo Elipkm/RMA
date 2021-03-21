@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Event } from 'src/Event';
 import { RmaConstants } from './rma-constants';
@@ -10,20 +9,29 @@ import { RmaConstants } from './rma-constants';
 })
 export class EventService {
 
-  private _eventsListUrl = this._rmaConstants.backEndMainRoute+"/event/list";
-  private _eventsCreateUrl = this._rmaConstants.backEndMainRoute+"/event";
+  private eventsListUrl = this._rmaConstants.backEndMainRoute+"/event/list";
+  private eventsCreateUrl = this._rmaConstants.backEndMainRoute+"/event";
+  private eventsDelteUrl = this._rmaConstants.backEndMainRoute+"/event/";
+  private eventsUpdateUrl = this._rmaConstants.backEndMainRoute+"/event";
 
   constructor(private http: HttpClient,
-              private _router: Router,
               private _rmaConstants: RmaConstants) { 
   }
 
   getEvents():Observable<any>{
-    return this.http.get<any>(this._eventsListUrl);
+    return this.http.get<any>(this.eventsListUrl);
   }
 
   createEvent(event: Event):Observable<any>{
-    return this.http.post<any>(this._eventsCreateUrl, event);
+    return this.http.post<any>(this.eventsCreateUrl, event);
+  }
+
+  deleteEvent(event: Event):Observable<any>{
+    return this.http.delete<any>(this.eventsDelteUrl+event.ID);
+  }
+
+  updateEvent(event: Event):Observable<any>{
+    return this.http.put<any>(this.eventsUpdateUrl, event);
   }
 }
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { EventCreationComponent } from './event-creation/event-creation.component';
+import { EventEditingComponent } from './event-editing/event-editing.component';
 import { EventSelectionComponent } from './event-selection/event-selection.component';
 import { LoginComponent } from './login/login.component';
 import { MenueComponent } from './menue/menue.component';
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'creation',
         component: EventCreationComponent
+      },
+      {
+        path: 'editing',
+        component: EventEditingComponent
       }
     ]
   },

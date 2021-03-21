@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/User';
 import { AuthService } from '../auth.service';
 import { EventService } from '../event.service';
@@ -83,6 +83,6 @@ export class EventSelectionComponent implements OnInit {
   }
 
   editEvent():void{
-
+    this._router.navigateByUrl('/event/editing', {state: this.selectedEvent});
   }
 }
