@@ -1,6 +1,7 @@
 package at.htlpinkafeld.RMA_backend_java.mock;
 
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
+import at.htlpinkafeld.RMA_backend_java.exception.DaoResourceAlreadyExistsException;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
 import java.util.ArrayList;
@@ -27,11 +28,11 @@ public class UserDaoMock implements UserDao {
         return true;
     }
     @Override
-    public void create(User user) throws DaoSysException {
+    public void create(User user) throws DaoSysException, DaoResourceAlreadyExistsException {
         if(isUnique(user)) {
             userList.add(user);
         }else{
-            throw new DaoSysException("Username not unique", DaoSysException.UNIQUE_ERROR);
+            throw new DaoResourceAlreadyExistsException("Username not unique");
         }
     }
 

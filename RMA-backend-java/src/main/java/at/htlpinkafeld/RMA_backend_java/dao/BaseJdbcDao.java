@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseJdbcDao<T extends Identifiable> {
+public abstract class BaseJdbcDao<T extends Identifiable>{
     private final String TABLENAME;
     private final String PKNAME;
 
@@ -119,7 +119,7 @@ public abstract class BaseJdbcDao<T extends Identifiable> {
                 t.setID(generatedKeys.getInt(1));
             }
         } catch (SQLException e) {
-            throw (DaoSysException) new DaoSysException(e.getMessage(), e.getErrorCode()).initCause(e);
+            throw (DaoSysException) new DaoSysException(e.getMessage()).initCause(e);
         }
     }
 }

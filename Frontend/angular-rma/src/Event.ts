@@ -1,7 +1,8 @@
 export class Event{
 
-    constructor(private id: number, private name: string,
-                private startDate: Date, private endDate: Date){
+    constructor(private name: string, private startDate: Date, 
+        private endDate?: Date, private id?: number){
+
     }
 
     get ID(){
@@ -37,7 +38,7 @@ export class Event{
     }
 
     public static eventOfObject(object: any): Event{
-        return new Event(object.id, object.name, object.startDate, object.endDate);
+        return new Event(object.name, object.startDate, object.endDate, object.id);
     }
 
 }

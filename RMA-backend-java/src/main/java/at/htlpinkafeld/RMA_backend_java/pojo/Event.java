@@ -12,8 +12,17 @@ public class Event implements Identifiable {
     private Date endDate;
 
     @JsonCreator
-    public Event(@JsonProperty("id") int id, @JsonProperty("name") String name,
+    public Event(@JsonProperty("id") String id, @JsonProperty("name") String name,
                  @JsonProperty("startDate") Date startDate, @JsonProperty("endDate") Date endDate){
+        if(id == null){
+            this.init(-1,name,startDate,endDate);
+        }
+    }
+
+    public Event(int id, String name,Date startDate, Date endDate) {
+        this.init(id,name,startDate,endDate);
+    }
+    private void init(int id, String name, Date startDate, Date endDate){
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -21,10 +30,7 @@ public class Event implements Identifiable {
     }
 
     public Event(String name, Date startDate, Date endDate) {
-        this.id = -1;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.init(-1,name,startDate,endDate);
     }
 
     public int getID() {

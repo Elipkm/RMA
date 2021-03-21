@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Event } from 'src/Event';
 import { EventService } from '../event.service';
 import { ToastService } from '../toast.service';
@@ -13,22 +14,28 @@ export class EventCreationComponent implements OnInit {
   formdata: FormGroup;
 
   constructor(private _eventService: EventService,
-              private _toastService: ToastService) { }
+              private _toastService: ToastService,
+              private _router: Router) { }
 
   ngOnInit(): void {
     this.formdata = new FormGroup({
       name: new FormControl("", Validators.required),
       startDate: new FormControl("", Validators.required),
-      endDate: new FormControl("", Validators.required)
+      endDate: new FormControl(""),
    });
   }
 
   createEvent():void{
     if(!this.formdata.valid){
-      console.log("invalid");
+      this._toastService.show("Bitte füllen Sie alle Pflichtfelder aus.", {
+        classname: "bg-danger text-light",
+        delay: 4000,
+        autohide: true,
+        headertext: "Error"
+      });
     }else{
       let value = this.formdata.value;
-      let event: Event = new Event(0, value.name, value.startDate, value.endDate);
+      let event: Event = value.endDate ? new Event(value.name, value.startDate, value.endDate) : new Event(value.name, value.startDate);
       this._eventService.createEvent(event).subscribe(
         res => {
         this._toastService.show("Das Event wurde erfolgreich angelegt.", {
@@ -37,11 +44,12 @@ export class EventCreationComponent implements OnInit {
           autohide: true,
           headertext: "Success"
         });
+        this._router.navigate(["/event/selection"]);
       },
       err => {
         if(err.status === 401){
           this._toastService.show('Sie sind nicht eingeloggt!', {
-            classname: 'bg-warning text-light',
+            classname: 'bg-warning',
             delay: 4000 ,
             autohide: true,
             headertext: 'Warning'

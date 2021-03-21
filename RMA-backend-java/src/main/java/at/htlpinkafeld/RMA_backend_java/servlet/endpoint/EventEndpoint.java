@@ -39,7 +39,8 @@ public class EventEndpoint {
         return userDao.getUserByUsername(username);
     }
     private Response responseDueToDaoException(DaoSysException daoSysException){
-        return Response.ok(daoSysException.getMessage()).status(500).build();
+        return Response.serverError().status(500,daoSysException.getMessage()).build();
+       // return Response.ok(daoSysException.getMessage()).status(500).build();
     }
 
     @POST
@@ -49,6 +50,8 @@ public class EventEndpoint {
             eventDao.create(getLoggedInUser(), event);
         } catch (DaoSysException daoSysException) {
            return responseDueToDaoException(daoSysException);
+        } catch (IllegalArgumentException illegalArgumentException){
+            return Response.status(409,illegalArgumentException.getMessage()).build();
         }
         JsonObject json = new JsonObject();
         json.add("id",new JsonPrimitive(event.getID()));
@@ -64,7 +67,7 @@ public class EventEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response read(@PathParam("id") int id){
         try{
-            Event event = null;
+            Event event;
             try {
                 event = eventDao.read(getLoggedInUser(), id);
             } catch (DaoSysException daoSysException) {

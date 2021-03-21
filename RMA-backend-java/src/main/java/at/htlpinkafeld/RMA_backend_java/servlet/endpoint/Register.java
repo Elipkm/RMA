@@ -1,6 +1,7 @@
 package at.htlpinkafeld.RMA_backend_java.servlet.endpoint;
 
 import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
+import at.htlpinkafeld.RMA_backend_java.exception.DaoResourceAlreadyExistsException;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
 import at.htlpinkafeld.RMA_backend_java.pojo.Credentials;
 import at.htlpinkafeld.RMA_backend_java.pojo.User;
@@ -31,25 +32,18 @@ public class Register {
         try {
             return this.tryRegister(credentials);
 
-        } catch (DaoSysException daoException) {
-            return catchExceptionDuringRegister(daoException);
+        } catch (DaoSysException daoSysException) {
+            return Response.serverError().status(500, daoSysException.getMessage()).build();
+        } catch (DaoResourceAlreadyExistsException daoResourceAlreadyExistsException){
+            return Response.status(409,daoResourceAlreadyExistsException.getMessage()).build();
         }
     }
 
-    private Response tryRegister(final Credentials credentials) throws DaoSysException {
+    private Response tryRegister(final Credentials credentials) throws DaoSysException, DaoResourceAlreadyExistsException {
         User user = new User(credentials.getUsername(), credentials.getPassword());
         this.userDao.create(user);
         Token token = this.tokenGenerator.issueToken(credentials.getUsername());
 
         return Response.ok(token).build();
-    }
-
-    private Response catchExceptionDuringRegister(DaoSysException daoSysException){
-        daoSysException.printStackTrace();
-
-        if(daoSysException.getErrorCode() == DaoSysException.UNIQUE_ERROR){
-            return Response.status(409,daoSysException.getMessage()).build();
-        }
-        return Response.status(500, daoSysException.getMessage()).build();
     }
 }

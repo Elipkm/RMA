@@ -1,25 +1,27 @@
 package at.htlpinkafeld.RMA_backend_java.dao;
 
+import at.htlpinkafeld.RMA_backend_java.exception.DaoNotFoundException;
 import at.htlpinkafeld.RMA_backend_java.exception.DaoSysException;
-import at.htlpinkafeld.RMA_backend_java.mock.EventDaoMock;
 import at.htlpinkafeld.RMA_backend_java.pojo.Event;
+import at.htlpinkafeld.RMA_backend_java.pojo.User;
 import hthurow.tomcatjndi.TomcatJNDI;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.File;
 import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EventJdbcDaoTest {
+public class EventJdbcDaoTest {
 
 
     private EventJdbcDao jdbcDao;
 
+    private User user;
+    private UserJdbcDao userJdbcDao;
+
     @BeforeAll
-    static void init() {
+    private static void init() {
         String pathContextFile = new File("src/main/webapp/META-INF/context.xml").getAbsolutePath();
 
         TomcatJNDI tomcatJNDI = new TomcatJNDI();
@@ -28,85 +30,100 @@ class EventJdbcDaoTest {
     }
 
     @BeforeEach
-    void setUp() {
-        jdbcDao = new EventJdbcDao();
+    private void setUp() {
+        this.user = new User("joe_doe","123");
+        this.userJdbcDao = new UserJdbcDao();
+        try {
+            this.userJdbcDao.create(user);
+        } catch (DaoSysException daoSysException) {
+            daoSysException.printStackTrace();
+        }
+        this.jdbcDao = new EventJdbcDao();
+    }
+
+    @AfterEach
+    private void afterEach() {
+        try {
+            this.userJdbcDao.delete(user);
+        } catch (DaoSysException daoSysException) {
+            daoSysException.printStackTrace();
+        }
     }
 
     @Test
-    void delete() {
+    public void delete() {
         try {
-            Event e= new Event("__deleteTest", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
-            jdbcDao.create(e);
-            int idElementToDel = e.getID();
+            Event event = new Event("__deleteTest", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
+            jdbcDao.create(user, event);
+            int idElementToDel = event.getID();
 
-            int noe = jdbcDao.list().size();
+            Event temp = new Event("", null, null);
+            temp.setID(idElementToDel);
+            try {
+                jdbcDao.delete(user, temp);
+            } catch (DaoNotFoundException daoNotFoundException) {
+                daoNotFoundException.printStackTrace();
+                fail();
+            }
 
-            Event tmp = new Event("", null,null);
-            tmp.setID(idElementToDel);
-            jdbcDao.delete(tmp);
-            assertTrue(jdbcDao.list().size() == noe-1);
-            assertTrue(jdbcDao.read(idElementToDel) == null);
-        } catch (DaoSysException e) {
+            assertEquals(jdbcDao.list(user).size(), 0);
+            assertThrows(DaoNotFoundException.class, () -> jdbcDao.read(user, idElementToDel));
+        }catch (DaoSysException daoSysException){
+            daoSysException.printStackTrace();
             fail();
         }
     }
 
     @Test
-    void testDeleteException() {
-        Event e= new Event("__deleteTestExc", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
-        e.setID(999999);
-        assertThrows(DaoSysException.class, () -> {
-            jdbcDao.delete(e);
-        });
+    public void testDeleteException() {
+        Event event = new Event("__deleteTestExc", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
+        event.setID(999999);
+        assertThrows(DaoNotFoundException.class, () -> jdbcDao.delete(user,event));
     }
 
     @Test
-    void create() {
+    public void create() {
         try {
-            int noe = jdbcDao.list().size();
-
             Event e = new Event("__createTest", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
-            jdbcDao.create(e);
+            jdbcDao.create(user,e);
 
             int id = e.getID();
 
-            assertTrue(jdbcDao.list().size() == noe+1);
-            assertTrue(jdbcDao.read(id) != null);
+            assertEquals(jdbcDao.list(user).size(), 1);
+            assertNotNull(jdbcDao.read(user, id));
 
-            jdbcDao.delete(e);
-        } catch (DaoSysException e) {
+            jdbcDao.delete(user,e);
+        } catch (DaoSysException | DaoNotFoundException e) {
             fail();
         }
     }
 
     @Test
-    void update() {
+    public void update() {
         try {
-            Event e = new Event("__updateTest", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
+            Event event = new Event("__updateTest", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
 
-            jdbcDao.create(e);
-            int id = e.getID();
+            jdbcDao.create(user, event);
+            int id = event.getID();
 
-            e.setStartDate(Date.valueOf("2021-01-01"));
-            e.setEndDate(Date.valueOf("2021-01-02"));
+            event.setStartDate(Date.valueOf("2021-01-01"));
+            event.setEndDate(Date.valueOf("2021-01-02"));
 
-            jdbcDao.update(e);
-            assertEquals(Date.valueOf("2021-01-01"), jdbcDao.read(id).getStartDate());
-            assertEquals(Date.valueOf("2021-01-02"), jdbcDao.read(id).getEndDate());
+            jdbcDao.update(user, event);
+            assertEquals(Date.valueOf("2021-01-01"), jdbcDao.read(user, id).getStartDate());
+            assertEquals(Date.valueOf("2021-01-02"), jdbcDao.read(user, id).getEndDate());
 
-            jdbcDao.delete(e);
-        } catch (DaoSysException e) {
+            jdbcDao.delete(user, event);
+        } catch (DaoSysException | DaoNotFoundException e) {
             fail();
         }
     }
 
     @Test
-    void testUpdateException() {
-        Event e = new Event("__updateTestExc", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
-        e.setID(9999991);
-        assertThrows(DaoSysException.class, () -> {
-            jdbcDao.update(e);
-        });
+    public void testUpdateException() {
+        Event event = new Event("__updateTestExc", Date.valueOf("1990-01-01"), Date.valueOf("1990-01-01"));
+        event.setID(9999991);
+        assertThrows(DaoNotFoundException.class, () -> jdbcDao.update(user,event));
     }
 
 }
