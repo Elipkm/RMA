@@ -16,6 +16,8 @@ public class Event implements Identifiable {
                  @JsonProperty("startDate") Date startDate, @JsonProperty("endDate") Date endDate){
         if(id == null){
             this.init(-1,name,startDate,endDate);
+        } else {
+            this.init(Integer.parseInt(id),name,startDate,endDate);
         }
     }
 
