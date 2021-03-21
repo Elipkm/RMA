@@ -29,7 +29,22 @@ CREATE TABLE Runner (
 	LastName VARCHAR(30) NOT NULL,
 	BirthDate DATE,
 	
+	
 	PRIMARY KEY (RunnerID)
+);
+
+CREATE TABLE RMA_Group (
+	GroupID INT AUTO_INCREMENT,
+	Name VARCHAR(30) NOT NULL UNIQUE,
+	
+	PRIMARY KEY (GroupID)
+);
+
+CREATE TABLE GroupMembership (
+	RunnerID INT,
+	GroupID INT,
+	
+	PRIMARY KEY (RunnerID, GroupID)
 );
 
 CREATE TABLE RMA_User (
@@ -88,3 +103,6 @@ ALTER TABLE Participation ADD CONSTRAINT FK_Event_Participation FOREIGN KEY (Eve
 
 ALTER TABLE Ownership ADD CONSTRAINT FK_User_Ownership FOREIGN KEY (UserID) REFERENCES RMA_User(UserID);
 ALTER TABLE Ownership ADD CONSTRAINT FK_Event_Ownership FOREIGN KEY (EventID) REFERENCES Event(EventID);
+
+ALTER TABLE GroupMembership ADD CONSTRAINT FK_Group_GroupMembership FOREIGN KEY (GroupID) REFERENCES RMA_Group(GroupID);
+ALTER TABLE GroupMembership ADD CONSTRAINT FK_Runner_GroupMembership FOREIGN KEY (RunnerID) REFERENCES Runner(RunnerID);
