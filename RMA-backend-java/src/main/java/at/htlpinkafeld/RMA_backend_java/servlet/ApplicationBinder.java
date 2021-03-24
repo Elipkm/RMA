@@ -2,6 +2,7 @@ package at.htlpinkafeld.RMA_backend_java.servlet;
 
 import at.htlpinkafeld.RMA_backend_java.dao.*;
 import at.htlpinkafeld.RMA_backend_java.mock.RunnerDaoMock;
+import at.htlpinkafeld.RMA_backend_java.mock.RunnerGroupDaoMock;
 import at.htlpinkafeld.RMA_backend_java.servlet.authentication.TokenGenerator;
 import at.htlpinkafeld.RMA_backend_java.servlet.authentication.TokenJwts;
 import at.htlpinkafeld.RMA_backend_java.servlet.authentication.TokenProcessor;
@@ -34,8 +35,15 @@ public class ApplicationBinder extends AbstractBinder {
     }
 
     private void configureMockDao() {
-        bind(new UserDaoMock()).to(UserDao.class);
-        bind(new EventDaoMock()).to(EventDao.class);
-        bind(new RunnerDaoMock()).to(RunnerDao.class);
+        UserDaoMock userDaoMock = new UserDaoMock();
+        EventDaoMock eventDaoMock = new EventDaoMock();
+        RunnerDaoMock runnerDaoMock = new RunnerDaoMock();
+        RunnerGroupDaoMock runnerGroupDaoMock = new RunnerGroupDaoMock(runnerDaoMock);
+
+        bind(userDaoMock).to(UserDao.class);
+        bind(eventDaoMock).to(EventDao.class);
+        bind(runnerDaoMock).to(RunnerDao.class);
+        bind(runnerGroupDaoMock).to(RunnerGroupDao.class);
+
     }
 }

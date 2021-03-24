@@ -13,6 +13,12 @@ public class RunnerGroup implements Identifiable {
         this.runnerList = runnerList;
     }
 
+    public RunnerGroup(String name, List<Runner> runnerList) {
+        this.name = name;
+        this.runnerList = runnerList;
+        this.id = -1;
+    }
+
     @Override
     public int getID() {
         return id;
