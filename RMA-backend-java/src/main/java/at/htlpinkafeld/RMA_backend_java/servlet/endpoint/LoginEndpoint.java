@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/login")
-public class Login {
+public class LoginEndpoint {
 
     @Inject
     private UserDao userDao;

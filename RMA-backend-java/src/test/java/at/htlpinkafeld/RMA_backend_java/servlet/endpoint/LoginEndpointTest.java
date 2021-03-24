@@ -10,31 +10,30 @@ import javax.ws.rs.core.Response;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class LoginTest {
+public class LoginEndpointTest {
 
-    private Login login;
+    private LoginEndpoint loginEndpoint;
 
     @BeforeEach
     public void setup(){
-        ServiceLocator serviceLocator = ServiceLocatorUtilities.bind(new UnitTestMockBinder());
-        login = new Login();
-        serviceLocator.inject(login);
+        loginEndpoint = new LoginEndpoint();
+        new UnitTestMockBinder().injectHereForUnitTest(loginEndpoint);
     }
 
     @Test
     public void testSuccessful(){
-        Response response = login.authenticateUser(new Credentials("elias","secret"));
+        Response response = loginEndpoint.authenticateUser(new Credentials("elias","secret"));
         assertEquals(200, response.getStatus());
     }
     @Test
     public void testUnauthorizedWrongPassword(){
-        Response response = login.authenticateUser(new Credentials("elias", "wrong"));
+        Response response = loginEndpoint.authenticateUser(new Credentials("elias", "wrong"));
         assertEquals(401, response.getStatus());
     }
 
     @Test
     public void testUnauthorizedUnknownUser(){
-        Response response = login.authenticateUser(new Credentials("unknown", "pw"));
+        Response response = loginEndpoint.authenticateUser(new Credentials("unknown", "pw"));
         assertEquals(401, response.getStatus());
     }
 

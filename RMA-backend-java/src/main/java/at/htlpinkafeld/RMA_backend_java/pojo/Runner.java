@@ -9,9 +9,16 @@ public class Runner implements Identifiable {
     private String firstname;
     private String lastname;
     private Date birthdate;
-    private List<Round> roundList;
+    private List<Round> roundList = null;
 
     public Runner(String firstname, String lastname, Date birthdate) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.birthdate = birthdate;
+    }
+
+    public Runner(int id, String firstname, String lastname, Date birthdate) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthdate = birthdate;

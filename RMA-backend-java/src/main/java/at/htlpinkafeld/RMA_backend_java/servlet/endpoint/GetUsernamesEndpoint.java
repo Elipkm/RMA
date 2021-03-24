@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
 @Path("/usernames")
-public class GetUsernames {
+public class GetUsernamesEndpoint {
 
     @Inject
     private UserDao userDao;

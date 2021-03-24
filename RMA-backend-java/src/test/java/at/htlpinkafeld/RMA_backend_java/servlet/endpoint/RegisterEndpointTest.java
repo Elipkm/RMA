@@ -2,36 +2,33 @@ package at.htlpinkafeld.RMA_backend_java.servlet.endpoint;
 
 import at.htlpinkafeld.RMA_backend_java.UnitTestMockBinder;
 import at.htlpinkafeld.RMA_backend_java.pojo.Credentials;
-import org.glassfish.hk2.api.ServiceLocator;
-import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javax.ws.rs.core.Response;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RegisterTest {
+public class RegisterEndpointTest {
 
-    private Register register;
+    private RegisterEndpoint registerEndpoint;
 
     @BeforeEach
     public void setup(){
-        register = new Register();
-        ServiceLocator locator = ServiceLocatorUtilities.bind(new UnitTestMockBinder());
-        locator.inject(register);
+        registerEndpoint = new RegisterEndpoint();
+        new UnitTestMockBinder().injectHereForUnitTest(registerEndpoint);
     }
 
     @Test
     public void successfulRegister() {
         Credentials credentials = new Credentials("joe","doe");
-        Response response = register.register(credentials);
+        Response response = registerEndpoint.register(credentials);
 
         assertEquals(200,response.getStatus());
     }
     @Test
     public void failRegister(){
         Credentials credentials = new Credentials("elias","any");
-        Response response = register.register(credentials);
+        Response response = registerEndpoint.register(credentials);
 
         assertEquals(409,response.getStatus());
     }

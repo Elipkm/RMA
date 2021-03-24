@@ -1,9 +1,7 @@
 package at.htlpinkafeld.RMA_backend_java.servlet;
 
-import at.htlpinkafeld.RMA_backend_java.dao.EventDao;
-import at.htlpinkafeld.RMA_backend_java.dao.EventJdbcDao;
-import at.htlpinkafeld.RMA_backend_java.dao.UserDao;
-import at.htlpinkafeld.RMA_backend_java.dao.UserJdbcDao;
+import at.htlpinkafeld.RMA_backend_java.dao.*;
+import at.htlpinkafeld.RMA_backend_java.mock.RunnerDaoMock;
 import at.htlpinkafeld.RMA_backend_java.servlet.authentication.TokenGenerator;
 import at.htlpinkafeld.RMA_backend_java.servlet.authentication.TokenJwts;
 import at.htlpinkafeld.RMA_backend_java.servlet.authentication.TokenProcessor;
@@ -12,11 +10,18 @@ import at.htlpinkafeld.RMA_backend_java.mock.UserDaoMock;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 public class ApplicationBinder extends AbstractBinder {
+
+    private boolean configureMock;
+    public ApplicationBinder(boolean configureMock){
+        this.configureMock = configureMock;
+    }
     @Override
     protected void configure() {
-
-        configureMockDao();
-        //configureJdbcDao();
+        if(configureMock){
+            this.configureMockDao();
+        } else {
+            this.configureJdbcDao();
+        }
 
         TokenJwts tokenJwts = new TokenJwts();
         bind(tokenJwts).to(TokenGenerator.class);
@@ -31,5 +36,6 @@ public class ApplicationBinder extends AbstractBinder {
     private void configureMockDao() {
         bind(new UserDaoMock()).to(UserDao.class);
         bind(new EventDaoMock()).to(EventDao.class);
+        bind(new RunnerDaoMock()).to(RunnerDao.class);
     }
 }

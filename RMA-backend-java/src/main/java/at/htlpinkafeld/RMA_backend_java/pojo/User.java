@@ -7,16 +7,20 @@ import java.util.Objects;
 
 public class User implements Identifiable {
 
+    private int id;
     private String username;
     private String encodedPassword;
     private final PasswordEncoder passwordEncoder;
 
-    private int id = -1;
-
     public User(String username, String password) {
+        this(-1, username,password);
+    }
+
+    public User(int id, String username, String password) {
         this.setUsernameWithRightFormat(username);
         this.passwordEncoder = new PasswordEncoder(password);
         this.encodedPassword = passwordEncoder.getEncodedPassword();
+        this.id = id;
     }
 
     public String getUsername() {

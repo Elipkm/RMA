@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 
 @Secured
 @Path("/renewToken")
-public class RenewToken {
+public class RenewTokenEndpoint {
     @Inject
     private TokenGenerator tokenGenerator;
 
