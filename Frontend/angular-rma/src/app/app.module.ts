@@ -21,6 +21,7 @@ import { EventSelectionComponent } from './event-selection/event-selection.compo
 import { EventCreationComponent } from './event-creation/event-creation.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import { EventEditingComponent } from './event-editing/event-editing.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {JwtHelperService} from '@auth0/angular-jwt';
     ToastComponent,
     LoadingScreenComponent,
     EventSelectionComponent,
-    EventCreationComponent
+    EventCreationComponent,
+    EventEditingComponent
   ],
   imports: [
     BrowserModule,
