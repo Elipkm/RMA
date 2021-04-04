@@ -7,6 +7,7 @@ import { EventSelectionComponent } from './event-selection/event-selection.compo
 import { LoginComponent } from './login/login.component';
 import { MenueComponent } from './menue/menue.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RunnerCreationComponent } from './runner-creation/runner-creation.component';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
@@ -32,6 +33,16 @@ const routes: Routes = [
       {
         path: 'editing',
         component: EventEditingComponent
+      }
+    ]
+  },
+  {
+    path: 'runner',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'creation',
+        component: RunnerCreationComponent
       }
     ]
   },

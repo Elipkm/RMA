@@ -22,6 +22,7 @@ import { EventCreationComponent } from './event-creation/event-creation.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import { EventEditingComponent } from './event-editing/event-editing.component';
+import { RunnerCreationComponent } from './runner-creation/runner-creation.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EventEditingComponent } from './event-editing/event-editing.component';
     LoadingScreenComponent,
     EventSelectionComponent,
     EventCreationComponent,
-    EventEditingComponent
+    EventEditingComponent,
+    RunnerCreationComponent
   ],
   imports: [
     BrowserModule,

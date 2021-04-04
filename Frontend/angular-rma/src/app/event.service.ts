@@ -11,7 +11,7 @@ export class EventService {
 
   private eventsListUrl = this._rmaConstants.backEndMainRoute+"/event/list";
   private eventsCreateUrl = this._rmaConstants.backEndMainRoute+"/event";
-  private eventsDelteUrl = this._rmaConstants.backEndMainRoute+"/event/";
+  private eventsDeleteUrl = this._rmaConstants.backEndMainRoute+"/event/";
   private eventsUpdateUrl = this._rmaConstants.backEndMainRoute+"/event";
 
   constructor(private http: HttpClient,
@@ -27,7 +27,7 @@ export class EventService {
   }
 
   deleteEvent(event: Event):Observable<any>{
-    return this.http.delete<any>(this.eventsDelteUrl+event.ID);
+    return this.http.delete<any>(this.eventsDeleteUrl+event.ID);
   }
 
   updateEvent(event: Event):Observable<any>{

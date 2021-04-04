@@ -1,0 +1,76 @@
+<div>
+    <header>
+        <div id="runner_creation_heading">
+            <div class="row">
+                <div class="col-sm-2">
+                    <img id="logo_large" src="assets/images/logo_large.png"
+                        srcset="assets/images/logo_large.png 1x, assets/images/logo_large@2x.png 2x">
+                </div>
+                <div id="RunnerCreation" class="col-sm-8">
+                    <span>Läufer Erstellen</span>
+                </div>
+                <div class="col-sm-2">
+
+                </div>
+            </div>
+            <div class="row">
+                <div id="blue_line" class="col-sm-8">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--Statically positioned in styles.css-->
+    <div class="accountDiv clickable" (click)="logOut()">
+        <span>{{ user.getUserName().substring(0,4) }}</span>
+    </div>
+
+    <main>
+        <div class="row">
+            <div class="col-sm-12 ">
+                <span class="runnerCreationBodyText">[i] Tragen Sie hier bitte den Namen und die Gruppen
+                    des neuen Läufers ein.</span>
+            </div>
+        </div>
+
+        <div class="row runner_creation_form_row">
+            <div class="col-sm-12 col-md-12">
+                <form [formGroup]="formdata">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="name" class="runnerCreationBodyText">Name: </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input id="name" type="text" name="name" class="form-control runner_creation_input"
+                                formControlName="name">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="name" class="runnerCreationBodyText">Gruppen: </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input id="groups" type="text" name="groups" 
+                                class="form-control runner_creation_input" formControlName="groups">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer id="runner_creation_footer">
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-2"></div>
+            <div class="col-md-3 col-sm-3 col-3">
+                <button class="btn btn-dark footer_button">Zurück</button>
+            </div>
+            <div class="col-md-5 col-sm-5 col-5">
+                <button class="btn btn-primary footer_button" (click)="createRunner()">
+                    Bestätigen
+                </button>
+            </div>
+        </div>
+    </footer>
+</div>
