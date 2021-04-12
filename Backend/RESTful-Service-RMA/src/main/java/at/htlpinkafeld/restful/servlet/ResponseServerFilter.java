@@ -22,6 +22,7 @@ public class ResponseServerFilter implements ContainerResponseFilter {
         for(String allowedUrl : allowedUrlsForCORS){
             responseContext.getHeaders().add("Access-Control-Allow-Origin",allowedUrl);
         }
+        responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
         //responseContext.getHeaders().add("Access-Control-Allow-Credentials","true");
         responseContext.getHeaders().add("Access-Control-Allow-Headers", "Authorization");
         responseContext.getHeaders().add("Access-Control-Allow-Headers", "Content-Type");
